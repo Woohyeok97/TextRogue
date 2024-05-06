@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import RootProvider from './RootProvider';
 
 export const metadata: Metadata = {
   title: 'prototype',
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <RootProvider>{children}</RootProvider>
+      </body>
     </html>
   );
 }
