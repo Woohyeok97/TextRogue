@@ -45,7 +45,8 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:40aba29b2325f2755a5b8c478f2dc0fa0b6268e088e438ee2db387b27aff53bf65f618c584163d28054bb55fb58052b2d44070e55dcf3e9b31d7652d7694bdb6#npm:18.3.1"],\
           ["tailwindcss", "npm:3.4.3"],\
-          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
+          ["zod", "npm:3.23.6"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -4502,7 +4503,8 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:40aba29b2325f2755a5b8c478f2dc0fa0b6268e088e438ee2db387b27aff53bf65f618c584163d28054bb55fb58052b2d44070e55dcf3e9b31d7652d7694bdb6#npm:18.3.1"],\
           ["tailwindcss", "npm:3.4.3"],\
-          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
+          ["zod", "npm:3.23.6"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -5641,6 +5643,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/yocto-queue-npm-0.1.0-c6c9a7db29-10c0.zip/node_modules/yocto-queue/",\
         "packageDependencies": [\
           ["yocto-queue", "npm:0.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["zod", [\
+      ["npm:3.23.6", {\
+        "packageLocation": "../../../.yarn/berry/cache/zod-npm-3.23.6-292bd5eb23-10c0.zip/node_modules/zod/",\
+        "packageDependencies": [\
+          ["zod", "npm:3.23.6"]\
         ],\
         "linkType": "HARD"\
       }]\

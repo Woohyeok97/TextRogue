@@ -1,6 +1,6 @@
 'use client';
 import { createPrologue } from '@/remotes/claude';
-import { createStory } from '@/remotes/story';
+import { createScenario } from '@/remotes/scenario';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -11,18 +11,18 @@ export default function Home() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const { mutate: prologue } = useMutation({
+  const { mutate: prologuee } = useMutation({
     mutationFn: async () => {
       return await createPrologue(genre, background);
     },
     onSuccess: data => {
       console.log('muta!!', data);
-      queryClient.setQueryData<string>(['claudeText'], data);
+      queryClient.setQueryData<string>(['prologue'], data);
     },
   });
 
-  const { data: claudeText } = useQuery<string>({
-    queryKey: ['claudeText'],
+  const { data: prologue } = useQuery<string>({
+    queryKey: ['prologue'],
   });
 
   const handleClick = () => {
@@ -30,15 +30,15 @@ export default function Home() {
       console.log('??');
       return;
     }
-    prologue();
+    prologuee();
   };
 
   const { mutate: story } = useMutation({
     mutationFn: async () => {
-      if (!claudeText) {
+      if (!prologue) {
         return;
       }
-      return await createStory({ genre, background, claudeText, title, description });
+      return await createScenario({ genre, background, prologue, title, description });
     },
     onSuccess: data => {
       console.log('create!!', data);
@@ -46,7 +46,7 @@ export default function Home() {
   });
 
   const handleSubmit = () => {
-    if (!claudeText || !title || !description) {
+    if (!prologue || !title || !description) {
       return console.log('뭐하세용');
     }
     story();
@@ -73,7 +73,7 @@ export default function Home() {
       <button onClick={handleClick}>클라우드야 부탁해</button>
       <div className="p-5 min-h-10 min-w-10">
         <div>claud 답변</div>
-        <div>{claudeText || ''}</div>
+        <div>{prologue || ''}</div>
       </div>
       <div className="flex flex-col gap-5">
         <input placeholder="제목을 정해주세요." value={title} onChange={e => setTitle(e.target.value)} />

@@ -6,8 +6,8 @@ export async function POST(req: NextRequest) {
   const db = await (await connectDB).db('prototype');
   try {
     console.log(formData);
-    const result = await db.collection('prologue').insertOne(formData);
-    return Response.json('create prologue!');
+    const result = await db.collection('scenario').insertOne(formData);
+    return Response.json('create scenario!');
   } catch (err) {
     return new Response(JSON.stringify({ message: err }), { status: 500 });
   }
