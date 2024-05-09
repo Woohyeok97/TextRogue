@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface StepProviderProps<T> {
@@ -16,14 +17,19 @@ export default function useStep<T extends string>() {
     router.push(`?${params.toString()}`);
   };
 
-  function StepProvider({ children, name, isDefault }: StepProviderProps<T>) {
-    if (currentStep === null && isDefault) {
-      return <>{children}</>;
-    }
-    if (currentStep === name) {
-      return <>{children}</>;
-    }
-  }
+  const StepProvider = useCallback(
+    ({ children, name, isDefault }: StepProviderProps<T>) => {
+      if (currentStep === null && isDefault) {
+        return <>{children}</>;
+      }
+      if (currentStep === name) {
+        return <>{children}</>;
+      } else {
+        return null;
+      }
+    },
+    [currentStep]
+  );
 
   return { currentStep, StepProvider, setStep };
 }
