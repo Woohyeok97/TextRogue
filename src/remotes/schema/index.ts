@@ -8,3 +8,6 @@ export const ScenarioSchema = z.object({
   prologue: z.string().min(1),
   description: z.string().min(1, { message: '설명을 작성해주세요.' }),
 });
+
+// 시나리오 리스트 스키마
+export const ScenarioListSchema = z.array(ScenarioSchema);
