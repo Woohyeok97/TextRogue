@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import RootProvider from './RootProvider';
+import RootProvider from '../components/shared/RootProvider';
 
 export const metadata: Metadata = {
   title: 'prototype',
