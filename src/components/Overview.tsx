@@ -1,17 +1,35 @@
-import { ScenarioType } from '@/models';
-import { createScenario } from '@/remotes/scenario';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
+// type
+import { ScenarioType } from '@/models';
+// reomotes
+import { createScenario } from '@/remotes/scenario';
 
 export default function Overview() {
-  const { register, handleSubmit, getValues } = useFormContext<ScenarioType>();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    trigger,
+    formState: { errors },
+  } = useFormContext<ScenarioType>();
   const [isOpen, setIsOpen] = useState(false);
-  // const handlePreview = handleSubmit(formData => {
-  //   console.log('맞습니까?', formData);
-  // });
+  const router = useRouter();
+
+  // 미리보기 핸들러
+  const handlePreview = async () => {
+    const result = await trigger(['title', 'description']);
+    if (result) {
+      setIsOpen(true);
+    }
+  };
+
+  // 시나리오 생성 핸들러
   const handleClick = handleSubmit(async formData => {
     const response = await createScenario(formData);
-    console.log(response);
+    alert('시나리오가 생성되었습니다.');
+    router.push('/');
   });
 
   return (
@@ -20,10 +38,12 @@ export default function Overview() {
       {!isOpen ? (
         <div>
           <h3>타이틀</h3>
-          <input type="text" {...register('title')} />
+          <input type="text" {...register('title', { required: true })} />
+          {errors.title && <p>{errors.title.message}</p>}
           <h3>시나리오 설명</h3>
-          <textarea className="text-black" {...register('description')} />
-          <button onClick={() => setIsOpen(true)}>생성하기</button>
+          <textarea className="text-black" {...register('description', { required: true })} />
+          {errors.description && <p>{errors.description.message}</p>}
+          <button onClick={handlePreview}>미리보기</button>
         </div>
       ) : (
         <Preview formData={getValues()} onClick={handleClick} />

@@ -1,14 +1,17 @@
-import { createPrologue } from '@/remotes/claude';
+import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
+// type
+import { ScenarioType } from '@/models';
+// remotes
+import { createPrologue } from '@/remotes/claude';
 
 interface PrologueProps {
-  onNext?: () => void;
+  onNext: () => void;
 }
 export default function Prologue({ onNext }: PrologueProps) {
-  const { getValues, register, setValue } = useFormContext();
   const queryClient = useQueryClient();
+  const { getValues, register, setValue, trigger } = useFormContext<ScenarioType>();
 
   const { data: prologue } = useQuery<string>({ queryKey: ['prologue'] });
 
@@ -28,18 +31,24 @@ export default function Prologue({ onNext }: PrologueProps) {
     }
   }, [getValues, mutate, prologue]);
 
+  const handleClick = async () => {
+    const isValid = await trigger(['prologue']);
+    if (isValid) {
+      onNext();
+    }
+  };
+
   console.log(prologue);
 
   return (
     <div className="flex flex-col gap-10">
       <h1>프롤로그</h1>
-      <button onClick={() => console.log(status)}>cl</button>
       {!prologue ? (
         <div>생성중...</div>
       ) : (
         <textarea readOnly className="text-black" value={prologue} {...register('prologue')} />
       )}
-      <button onClick={onNext}>next</button>
+      <button onClick={handleClick}>next</button>
     </div>
   );
 }
