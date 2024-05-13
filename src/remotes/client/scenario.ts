@@ -1,7 +1,7 @@
 import axios from 'axios';
 // Type & Schema
 import { ScenarioType } from '@/models';
-import { ScenarioSchema } from './schema';
+import { ScenarioSchema } from '../schema';
 
 // 시나리오 생성
 export const createScenario = async (scenario: ScenarioType) => {

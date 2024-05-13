@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 // type
 import { ScenarioType } from '@/models';
 // remotes
-import { createPrologue } from '@/remotes/claude';
+import { createPrologue } from '@/remotes/client/claude';
 
 interface PrologueProps {
   onNext: () => void;
