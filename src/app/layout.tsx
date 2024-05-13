@@ -11,7 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <RootProvider>{children}</RootProvider>
+        <main className="max-w-3xl min-h-screen mx-auto">
+          <RootProvider>{children}</RootProvider>
+        </main>
       </body>
     </html>
   );

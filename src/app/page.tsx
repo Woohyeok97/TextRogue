@@ -1,4 +1,6 @@
+// components
 import ScenarioItem from '@/components/shared/ScenarioItem';
+// remotes
 import { getScenarioList } from '@/remotes/server/scenario';
 
 export default async function Home() {

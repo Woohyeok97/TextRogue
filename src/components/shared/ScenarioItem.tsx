@@ -10,7 +10,7 @@ export default function ScenarioItem({ scenario }: ScenarioItemProps) {
     <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
       <div className="mt-2">
         <Link
-          href="#"
+          href={`/scenario/${scenario._id}`}
           className="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline"
         >
           {scenario.title}
