@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+// components
+import { Spacing } from '@/components/shared/Spacing';
 // remotes
 import { getScenarioById } from '@/remotes/server/scenario';
-import { Spacing } from '@/components/shared/Spacing';
 
 interface ScenarioDetailProps {
   params: { id: string };
