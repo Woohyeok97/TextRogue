@@ -1,7 +1,7 @@
 // components
 import ScenarioItem from '@/components/shared/ScenarioItem';
 // remotes
-import { getScenarioList } from '@/remotes/server/scenario';
+import { getScenarioList } from '@/remotes/mongodb/server/scenario';
 
 export default async function Home() {
   const scenarioList = await getScenarioList();

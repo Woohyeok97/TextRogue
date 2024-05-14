@@ -3,7 +3,7 @@ import Link from 'next/link';
 // components
 import { Spacing } from '@/components/shared/Spacing';
 // remotes
-import { getScenarioById } from '@/remotes/server/scenario';
+import { getScenarioById } from '@/remotes/mongodb/server/scenario';
 
 interface ScenarioDetailProps {
   params: { id: string };

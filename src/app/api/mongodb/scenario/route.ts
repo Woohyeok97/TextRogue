@@ -1,4 +1,4 @@
-import { connectDB } from '@/remotes/mongodb';
+import { connectDB } from '@/remotes/mongodb/mongodb';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {

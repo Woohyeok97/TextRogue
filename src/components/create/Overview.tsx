@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 // type
 import { ScenarioType } from '@/models';
 // reomotes
-import { createScenario } from '@/remotes/client/scenario';
+import { createScenario } from '@/remotes/mongodb/client/scenario';
 
 export default function Overview() {
   const {

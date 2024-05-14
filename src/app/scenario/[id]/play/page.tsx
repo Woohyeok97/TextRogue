@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import ScenarioPlay from '@/components/play/ScenarioPlay';
 import { Spacing } from '@/components/shared/Spacing';
 // remotes
-import { getScenarioById } from '@/remotes/server/scenario';
+import { getScenarioById } from '@/remotes/mongodb/server/scenario';
 
 export const metadata: Metadata = {
   title: '',
