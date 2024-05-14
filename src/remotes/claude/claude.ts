@@ -17,8 +17,9 @@ interface PromptType {
 }
 
 // 시나리오 플레이
-export const playScenario = async (prompt: PromptType): Promise<StoryType> => {
+export const playStory = async (prompt: PromptType): Promise<StoryType> => {
   const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE}/play`, { ...prompt });
+  console.log(response.data);
   const next = StorySchema.parse(JSON.parse(response.data));
   return next;
 };

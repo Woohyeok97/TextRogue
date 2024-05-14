@@ -5,7 +5,7 @@ import { StoryType } from '@/models';
 
 interface StoryItemProps {
   story: StoryType;
-  onClick?: () => void;
+  onClick: (choice: string) => void;
 }
 export default function StoryItem({ story, onClick }: StoryItemProps) {
   return (
@@ -18,7 +18,7 @@ export default function StoryItem({ story, onClick }: StoryItemProps) {
         {story.choices.map((item, i) => (
           <div
             key={i}
-            onClick={() => console.log(item)}
+            onClick={() => onClick(item)}
             className="px-8 py-4 bg-white rounded-lg cursor-pointer dark:bg-gray-800 duration-300 hover:bg-gray-700"
           >
             {i + 1}. {item}
