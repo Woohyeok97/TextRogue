@@ -6,6 +6,7 @@ import { ScenarioType } from '@/models';
 // remotes
 import { generatePrologue } from '@/remotes/claude/claude';
 import { Input } from '../shared/Input';
+import { TextArea } from '../shared/TextArea';
 
 interface PrologueProps {
   onNext: () => void;
@@ -46,7 +47,7 @@ export default function Prologue({ onNext }: PrologueProps) {
         <div>생성중...</div>
       ) : (
         <>
-          <textarea readOnly className="text-black" {...register('prologue.text')} />
+          <TextArea readOnly {...register('prologue.text')} />
           <div className="flex flex-col gap-3">
             {getValues('prologue').choices.map((item, i) => (
               <Input key={item} disabled {...register(`prologue.choices.${i}`)} />

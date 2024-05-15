@@ -32,6 +32,9 @@
   select {
     @apply px-5 py-3 rounded-lg focus:border-blue-400 outline-none text-gray-700 dark:bg-gray-900 dark:text-gray-300
   }
+  textarea {
+    @apply px-5 py-3 rounded-lg focus:border-blue-400 outline-none text-gray-700 dark:bg-gray-900 dark:text-gray-300 resize-none
+  }
 }
 
 @layer utilities {
