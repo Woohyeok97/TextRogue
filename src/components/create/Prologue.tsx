@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { ScenarioType } from '@/models';
 // remotes
 import { generatePrologue } from '@/remotes/claude/claude';
+import { Input } from '../shared/Input';
 
 interface PrologueProps {
   onNext: () => void;
@@ -48,7 +49,7 @@ export default function Prologue({ onNext }: PrologueProps) {
           <textarea readOnly className="text-black" {...register('prologue.text')} />
           <div className="flex flex-col gap-3">
             {getValues('prologue').choices.map((item, i) => (
-              <input key={i} readOnly {...register(`prologue.choices.${i}`)} />
+              <Input key={item} disabled {...register(`prologue.choices.${i}`)} />
             ))}
           </div>
         </>
