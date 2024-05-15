@@ -1,6 +1,3 @@
-interface SpacingProps {
-  size?: keyof typeof Sizes;
-}
 const Sizes = {
   xs: 'h-[1rem]',
   sm: 'h-[2rem]',
@@ -9,6 +6,9 @@ const Sizes = {
   xl: 'h-[5rem]',
 };
 
+interface SpacingProps {
+  size?: keyof typeof Sizes;
+}
 export function Spacing({ size = 'xs' }: SpacingProps) {
   return <div className={`${Sizes[size]}`} />;
 }
