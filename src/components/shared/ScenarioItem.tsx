@@ -15,7 +15,7 @@ export default function ScenarioItem({ scenario }: ScenarioItemProps) {
         >
           {scenario.title}
         </Link>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 line-clamp-3">{scenario.prologue}</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300 line-clamp-3">{scenario.prologue.text}</p>
       </div>
 
       <div className="flex items-center justify-between mt-4">
@@ -30,7 +30,7 @@ export default function ScenarioItem({ scenario }: ScenarioItemProps) {
             href="#"
             className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
           >
-            {scenario.background}
+            {scenario.world}
           </Link>
         </div>
 

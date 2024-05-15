@@ -14,7 +14,7 @@ import { ScenarioSchema } from '@/remotes/schema';
 export default function CreateScenario() {
   const methods = useForm<ScenarioType>({ resolver: zodResolver(ScenarioSchema), mode: 'onChange' });
   const { StepProvider, setStep } = useStep<'theme' | 'prologue' | 'overview'>();
-
+  console.log('home render!!');
   return (
     <>
       <FormProvider {...methods}>
@@ -28,6 +28,7 @@ export default function CreateScenario() {
           <Overview />
         </StepProvider>
       </FormProvider>
+      <button onClick={() => console.log(methods.getValues())}>current</button>
     </>
   );
 }

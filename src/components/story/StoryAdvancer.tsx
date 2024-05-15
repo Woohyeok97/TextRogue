@@ -5,13 +5,13 @@ import StoryItem from './StoryItem';
 // types
 import { ScenarioType, StoryType } from '@/models';
 // remotes
-import { playStory } from '@/remotes/claude/claude';
+import { continueStory } from '@/remotes/claude/claude';
 
-interface ScenarioPlayProps {
+interface StoryAdvancerProps {
   scenario: ScenarioType;
 }
 
-export default function ScenarioPlay({ scenario }: ScenarioPlayProps) {
+export default function StoryAdvancer({ scenario }: StoryAdvancerProps) {
   const queryClient = useQueryClient();
   const { data: stories } = useQuery<StoryType[]>({
     queryKey: ['story', scenario._id],
@@ -32,9 +32,9 @@ export default function ScenarioPlay({ scenario }: ScenarioPlayProps) {
       console.log(`mutate 실행!! 이전 스토리: ${stories.map(item => item.text).join('')}   유저 선택: ${choice}`);
     },
     mutationFn: async (choice: string) => {
-      const nextStory = await playStory({
+      const nextStory = await continueStory({
         genre: scenario.genre,
-        world: scenario.background,
+        world: scenario.world,
         previousStory: stories.map(item => item.text).join(''),
         userChoice: choice,
       });
@@ -56,10 +56,10 @@ export default function ScenarioPlay({ scenario }: ScenarioPlayProps) {
   };
 
   return (
-    <>
+    <div className="flex flex-col justify-between gap-10">
       {stories.map((item, i) => (
         <StoryItem key={i} story={item} onClick={handleClick} />
       ))}
-    </>
+    </div>
   );
 }

@@ -62,8 +62,13 @@ function Preview({ formData, onClick }: PreviewProps) {
       <div>
         <h3>{formData.title}</h3>
         <h3>{formData.genre}</h3>
-        <h3>{formData.background}</h3>
-        <h3>{formData.prologue}</h3>
+        <h3>{formData.world}</h3>
+        <div>
+          <h3>{formData.prologue.text}</h3>
+          {formData.prologue.choices.map(item => (
+            <p key={item}>{item}</p>
+          ))}
+        </div>
         <h3>{formData.description}</h3>
       </div>
       <button onClick={onClick}>생성</button>

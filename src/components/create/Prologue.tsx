@@ -1,52 +1,57 @@
 import { useEffect } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useFormContext } from 'react-hook-form';
 // type
 import { ScenarioType } from '@/models';
 // remotes
-import { createPrologue } from '@/remotes/claude/claude';
+import { generatePrologue } from '@/remotes/claude/claude';
 
 interface PrologueProps {
   onNext: () => void;
 }
 export default function Prologue({ onNext }: PrologueProps) {
-  const queryClient = useQueryClient();
   const { getValues, register, setValue, trigger } = useFormContext<ScenarioType>();
-
-  const { data: prologue } = useQuery<string>({ queryKey: ['prologue'] });
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      return await createPrologue(getValues('genre'), getValues('background'));
+      const prologue = await generatePrologue({ genre: getValues('genre'), world: getValues('world') });
+      return prologue;
     },
-    onSuccess: data => {
-      queryClient.setQueryData<string>(['prologue'], data);
-      setValue('prologue', data);
+    onSuccess: prologue => {
+      setValue('prologue', prologue);
+    },
+    onError: err => {
+      console.log(err);
     },
   });
 
   useEffect(() => {
-    if (getValues('genre') && getValues('background') && !prologue) {
+    if (getValues('genre') && getValues('world') && !getValues('prologue.text')) {
       mutate();
     }
-  }, [getValues, mutate, prologue]);
+  }, [getValues, mutate]);
 
   const handleClick = async () => {
-    const isValid = await trigger(['prologue']);
+    const isValid = await trigger(['prologue.text']);
     if (isValid) {
       onNext();
     }
   };
 
-  console.log(prologue);
-
   return (
     <div className="flex flex-col gap-10">
       <h1>프롤로그</h1>
-      {!prologue ? (
+      {!getValues('prologue.text') ? (
         <div>생성중...</div>
       ) : (
-        <textarea readOnly className="text-black" value={prologue} {...register('prologue')} />
+        <>
+          <textarea readOnly className="text-black" {...register('prologue.text')} />
+          <div className="flex flex-col gap-3">
+            {getValues('prologue').choices.map((item, i) => (
+              <input key={i} readOnly {...register(`prologue.choices.${i}`)} />
+            ))}
+          </div>
+        </>
       )}
       <button onClick={handleClick}>next</button>
     </div>

@@ -1,26 +1,20 @@
-import { Metadata } from 'next';
 // components
-import ScenarioPlay from '@/components/play/ScenarioPlay';
+import StoryAdvancer from '@/components/story/StoryAdvancer';
 import { Spacing } from '@/components/shared/Spacing';
 // remotes
 import { getScenarioById } from '@/remotes/mongodb/server/scenario';
 
-export const metadata: Metadata = {
-  title: '',
-  description: '',
-};
-
 interface ScenarioPlayProps {
   params: { id: string };
 }
-export default async function PlayPage({ params }: ScenarioPlayProps) {
+export default async function StoryPage({ params }: ScenarioPlayProps) {
   const scenario = await getScenarioById(params.id);
   // console.log(scenario);
   return (
     <main>
       <h1>ScenarioPlay</h1>
       <Spacing size="lg" />
-      <ScenarioPlay scenario={scenario} />
+      <StoryAdvancer scenario={scenario} />
       <Spacing size="lg" />
     </main>
   );

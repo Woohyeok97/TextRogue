@@ -13,7 +13,7 @@ export default function StoryItem({ story, onClick }: StoryItemProps) {
       <div className="bg-gray-500 rounded-full w-10 h-10" />
       <Spacing />
       <div>{story.text}</div>
-      <Spacing size="md" />
+      <Spacing size="sm" />
       <div className="flex flex-col gap-4">
         {story.choices.map((item, i) => (
           <div

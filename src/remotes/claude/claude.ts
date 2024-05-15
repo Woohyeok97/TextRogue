@@ -1,25 +1,20 @@
 import axios from 'axios';
-import { StorySchema } from '../schema';
-import { StoryType } from '@/models';
 // type & schema
+import { StoryPromptType, StoryType } from '@/models';
+import { StoryPromptSchema, StorySchema } from '../schema';
 
-// 프롤로그 생성
-export const createPrologue = async (genre: string, background: string) => {
-  const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE}`, { genre, background });
-  return response.data.data;
+// 프롤로그 생성 (with Claude)
+export const generatePrologue = async ({ genre, world }: { genre: string; world: string }): Promise<StoryType> => {
+  const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE_PROLOGUE}`, { genre, world });
+  const prologue = StorySchema.parse(JSON.parse(response.data));
+  return prologue;
 };
 
-interface PromptType {
-  genre: string;
-  world: string;
-  previousStory: string;
-  userChoice: string;
-}
-
-// 시나리오 플레이
-export const playStory = async (prompt: PromptType): Promise<StoryType> => {
-  const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE}/play`, { ...prompt });
-  console.log(response.data);
+// 스토리 진행 (with Claude)
+export const continueStory = async (prompt: StoryPromptType): Promise<StoryType> => {
+  const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE_CONTINUE}`, {
+    ...StoryPromptSchema.parse(prompt),
+  });
   const next = StorySchema.parse(JSON.parse(response.data));
   return next;
 };

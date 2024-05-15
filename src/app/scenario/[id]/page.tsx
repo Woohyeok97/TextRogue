@@ -28,7 +28,7 @@ export default async function ScenarioDetail({ params }: ScenarioDetailProps) {
             <h1 className="block text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline">
               {scenario.title}
             </h1>
-            <Link href={`/scenario/${scenario._id}/play`}>
+            <Link href={`/story/${scenario._id}`}>
               <button className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                 Play
               </button>
@@ -45,11 +45,11 @@ export default async function ScenarioDetail({ params }: ScenarioDetailProps) {
               href="#"
               className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
             >
-              {scenario.background}
+              {scenario.world}
             </Link>
           </div>
           <Spacing />
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{scenario.prologue}</p>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{scenario.prologue.text}</p>
           <Spacing />
           <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">{scenario.description}</p>
         </div>
