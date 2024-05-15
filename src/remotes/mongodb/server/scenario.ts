@@ -2,7 +2,7 @@ import { connectDB } from '../mongodb';
 import { ObjectId } from 'mongodb';
 // type & schema
 import { ScenarioType } from '@/models';
-import { ScenarioListSchema, ScenarioSchema } from '../schema';
+import { ScenarioListSchema, ScenarioSchema } from '../../schema';
 
 // 시나리오 리스트 가져오기
 export const getScenarioList = async (): Promise<ScenarioType[]> => {

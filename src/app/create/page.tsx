@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: '',
 };
 
-export default function Create() {
+export default function CreatePage() {
   return (
     <main>
       <CreateScenario />

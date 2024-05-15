@@ -13,7 +13,7 @@ export default function Theme({ onNext }: ThemeProps) {
   } = useFormContext<ScenarioType>();
 
   const handleClick = async () => {
-    const isValid = await trigger(['genre', 'background']);
+    const isValid = await trigger(['genre', 'world']);
     if (isValid) {
       onNext();
     }
@@ -34,7 +34,7 @@ export default function Theme({ onNext }: ThemeProps) {
       </select>
       {errors.genre && <p>{errors.genre.message}</p>}
       <h3>세계관</h3>
-      <select {...register('background', { required: true })} defaultValue="">
+      <select {...register('world', { required: true })} defaultValue="">
         <option value="" disabled>
           세계관을 선택해주세요.
         </option>
@@ -43,7 +43,7 @@ export default function Theme({ onNext }: ThemeProps) {
         <option value="현대">현대</option>
         <option value="사이버펑크">사이버펑크</option>
       </select>
-      {errors.background && <p>{errors.background.message}</p>}
+      {errors.world && <p>{errors.world.message}</p>}
       <button onClick={handleClick}>next</button>
     </div>
   );
