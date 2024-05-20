@@ -7,7 +7,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input({ .
     <input
       ref={ref}
       type="text"
-      className="mt-2 border border-gray-200 dark:border-gray-600 dark:focus:border-blue-300"
+      className="mt-2 border px-5 py-3 rounded-lg text-gray-700  focus:border-blue-400 dark:bg-gray-900 dark:text-gray-300 border-gray-200 dark:border-gray-600 dark:focus:border-blue-300"
       {...props}
     />
   );

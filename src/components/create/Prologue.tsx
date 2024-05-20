@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useFormContext } from 'react-hook-form';
+// components
+import { Input } from '../shared/Input';
+import { TextArea } from '../shared/TextArea';
 // type
 import { ScenarioType } from '@/models';
 // remotes
 import { generatePrologue } from '@/remotes/claude/claude';
-import { Input } from '../shared/Input';
-import { TextArea } from '../shared/TextArea';
 
 interface PrologueProps {
   onNext: () => void;

@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
+// components
+import { Input } from '../shared/Input';
+import { TextArea } from '../shared/TextArea';
 // type
 import { ScenarioType } from '@/models';
 // reomotes
 import { createScenario } from '@/remotes/mongodb/client/scenario';
+import { Text } from '../shared/Text';
 
 export default function Overview() {
   const {
@@ -27,24 +31,24 @@ export default function Overview() {
 
   // 시나리오 생성 핸들러
   const handleClick = handleSubmit(async formData => {
-    const response = await createScenario(formData);
+    await createScenario(formData);
     alert('시나리오가 생성되었습니다.');
     router.push('/');
   });
 
   return (
     <div className="flex flex-col gap-10">
-      <h1>오버뷰</h1>
+      <Text align="center">Overview</Text>
       {!isOpen ? (
-        <div>
-          <h3>타이틀</h3>
-          <input type="text" {...register('title', { required: true })} />
+        <>
+          <Text>타이틀</Text>
+          <Input {...register('title', { required: true })} />
           {errors.title && <p>{errors.title.message}</p>}
           <h3>시나리오 설명</h3>
-          <textarea className="text-black" {...register('description', { required: true })} />
+          <TextArea {...register('description', { required: true })} />
           {errors.description && <p>{errors.description.message}</p>}
           <button onClick={handlePreview}>미리보기</button>
-        </div>
+        </>
       ) : (
         <Preview formData={getValues()} onClick={handleClick} />
       )}
