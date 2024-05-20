@@ -3,12 +3,13 @@ import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 // components
 import { Input } from '../shared/Input';
+import { Text } from '../shared/Text';
 import { TextArea } from '../shared/TextArea';
+import { Button } from '../shared/Button';
 // type
 import { ScenarioType } from '@/models';
 // reomotes
 import { createScenario } from '@/remotes/mongodb/client/scenario';
-import { Text } from '../shared/Text';
 
 export default function Overview() {
   const {
@@ -38,16 +39,16 @@ export default function Overview() {
 
   return (
     <div className="flex flex-col gap-10">
-      <Text align="center">Overview</Text>
+      <Text align="center" size="xl">
+        시나리오 오버뷰
+      </Text>
       {!isOpen ? (
         <>
-          <Text>타이틀</Text>
-          <Input {...register('title', { required: true })} />
-          {errors.title && <p>{errors.title.message}</p>}
-          <h3>시나리오 설명</h3>
-          <TextArea {...register('description', { required: true })} />
-          {errors.description && <p>{errors.description.message}</p>}
-          <button onClick={handlePreview}>미리보기</button>
+          <Input {...register('title', { required: true })} label="타이틀" />
+          {errors.title && <Text color="orangered">{errors.title.message}</Text>}
+          <TextArea {...register('description', { required: true })} label="시나리오 설명" />
+          {errors.description && <Text color="orangered">{errors.description.message}</Text>}
+          <Button onClick={handlePreview}>미리보기</Button>
         </>
       ) : (
         <Preview formData={getValues()} onClick={handleClick} />

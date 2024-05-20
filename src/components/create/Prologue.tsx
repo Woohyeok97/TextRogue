@@ -3,7 +3,9 @@ import { useMutation } from '@tanstack/react-query';
 import { useFormContext } from 'react-hook-form';
 // components
 import { Input } from '../shared/Input';
+import { Button } from '../shared/Button';
 import { TextArea } from '../shared/TextArea';
+import { Text } from '../shared/Text';
 // type
 import { ScenarioType } from '@/models';
 // remotes
@@ -13,7 +15,13 @@ interface PrologueProps {
   onNext: () => void;
 }
 export default function Prologue({ onNext }: PrologueProps) {
-  const { getValues, register, setValue, trigger } = useFormContext<ScenarioType>();
+  const {
+    getValues,
+    register,
+    setValue,
+    trigger,
+    formState: { errors },
+  } = useFormContext<ScenarioType>();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
@@ -43,20 +51,24 @@ export default function Prologue({ onNext }: PrologueProps) {
 
   return (
     <div className="flex flex-col gap-10">
-      <h1>프롤로그</h1>
+      <Text align="center" size="xl">
+        시나리오 프롤로그
+      </Text>
       {!getValues('prologue.text') ? (
         <div>생성중...</div>
       ) : (
         <>
-          <TextArea readOnly {...register('prologue.text')} />
+          <TextArea {...register('prologue.text', { required: true })} />
+          {errors.prologue?.text && <Text color="orangered">{errors.prologue.text.message}</Text>}
           <div className="flex flex-col gap-3">
             {getValues('prologue').choices.map((item, i) => (
-              <Input key={item} disabled {...register(`prologue.choices.${i}`)} />
+              <Input key={item} disabled {...register(`prologue.choices.${i}`, { required: true })} />
             ))}
+            {errors.prologue?.choices && <Text color="orangered">{errors.prologue.choices.message}</Text>}
           </div>
         </>
       )}
-      <button onClick={handleClick}>next</button>
+      <Button onClick={handleClick}>다음</Button>
     </div>
   );
 }

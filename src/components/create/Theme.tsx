@@ -4,9 +4,9 @@ import { WORLD_LIST } from '@/constants/worlds';
 // components
 import { Select } from '../shared/Select';
 import { Button } from '../shared/Button';
+import { Text } from '../shared/Text';
 // types
 import { ScenarioType } from '@/models';
-import { Text } from '../shared/Text';
 
 interface ThemeProps {
   onNext: () => void;
@@ -27,7 +27,9 @@ export default function Theme({ onNext }: ThemeProps) {
 
   return (
     <div className="flex flex-col gap-10">
-      <h1>테마 설정</h1>
+      <Text align="center" size="xl">
+        시나리오 테마
+      </Text>
       <Select {...register('genre', { required: true })} defaultValue="" label="장르">
         <option value="" disabled>
           장르를 선택해주세요
