@@ -1,5 +1,11 @@
 import { useFormContext } from 'react-hook-form';
-// type
+import { GENRE_LIST } from '@/constants/genres';
+import { WORLD_LIST } from '@/constants/worlds';
+// components
+import { Select } from '../shared/Select';
+import { Button } from '../shared/Button';
+import { Text } from '../shared/Text';
+// types
 import { ScenarioType } from '@/models';
 
 interface ThemeProps {
@@ -21,30 +27,32 @@ export default function Theme({ onNext }: ThemeProps) {
 
   return (
     <div className="flex flex-col gap-10">
-      <h1>테마 설정</h1>
-      <h3>장르</h3>
-      <select {...register('genre', { required: true })} defaultValue="">
+      <Text align="center" size="xl">
+        시나리오 테마
+      </Text>
+      <Select {...register('genre', { required: true })} defaultValue="" label="장르">
         <option value="" disabled>
           장르를 선택해주세요
         </option>
-        <option value="추리">추리</option>
-        <option value="공포">공포</option>
-        <option value="모험">모험</option>
-        <option value="SF">SF</option>
-      </select>
-      {errors.genre && <p>{errors.genre.message}</p>}
-      <h3>세계관</h3>
-      <select {...register('world', { required: true })} defaultValue="">
+        {GENRE_LIST.map(item => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </Select>
+      {errors.genre && <Text color="orangered">{errors.genre.message}</Text>}
+      <Select {...register('world', { required: true })} defaultValue="" label="세계관">
         <option value="" disabled>
           세계관을 선택해주세요.
         </option>
-        <option value="중세">중세</option>
-        <option value="판타지">판타지</option>
-        <option value="현대">현대</option>
-        <option value="사이버펑크">사이버펑크</option>
-      </select>
-      {errors.world && <p>{errors.world.message}</p>}
-      <button onClick={handleClick}>next</button>
+        {WORLD_LIST.map(item => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </Select>
+      {errors.world && <Text color="orangered">{errors.world.message}</Text>}
+      <Button onClick={handleClick}>다음</Button>
     </div>
   );
 }
