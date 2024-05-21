@@ -14,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="max-w-3xl min-h-screen mx-auto">
           <RootProvider>{children}</RootProvider>
         </main>
+        <div id="overlay" />
       </body>
     </html>
   );

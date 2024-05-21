@@ -4,8 +4,8 @@ interface TextProps {
   color?: keyof typeof colorOptions;
   size?: keyof typeof sizeOptions;
 }
-export function Text({ children, align = 'left', color = 'gray', size = 'base' }: TextProps) {
-  return <span className={`${alignOptions[align]} ${colorOptions[color]} ${sizeOptions[size]}`}>{children}</span>;
+export function Text({ children, align = 'left', color = 'white', size = 'base' }: TextProps) {
+  return <span className={`${alignOptions[align]} ${colorOptions[color]} ${sizeOptions[size]} block`}>{children}</span>;
 }
 
 const alignOptions = {
@@ -16,7 +16,7 @@ const alignOptions = {
 const colorOptions = {
   blue: 'text-blue-800',
   white: 'text-white',
-  gray: 'text-gray',
+  gray: 'text-gray-500',
   orangered: 'text-orange-700',
 };
 

@@ -1,21 +1,21 @@
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   onClick?: () => void;
   color?: keyof typeof colorOptions;
   size?: keyof typeof sizeOptions;
 }
-export function Button({ children, onClick, color = 'blue', size = 'base' }: ButtonProps) {
+export function Button({ children, onClick, color = 'blue', size = 'base', ...props }: ButtonProps) {
   return (
-    <button className={`px-6 py-2 rounded-lg ${colorOptions[color]} ${sizeOptions[size]}`} onClick={onClick}>
+    <button className={`px-6 py-2 rounded-lg ${colorOptions[color]} ${sizeOptions[size]}`} onClick={onClick} {...props}>
       {children}
     </button>
   );
 }
 
 const colorOptions = {
-  blue: 'bg-blue-800',
+  blue: 'bg-blue-800 duration-200 hover:bg-blue-700',
   white: 'bg-white hover:bg-white-hover text-black',
-  gray: 'bg-gray hover:bg-gray-hover',
+  gray: 'bg-gray-500 duration-200 text-gray-300 hover:bg-gray-400',
   orangered: 'bg-orange-700',
 };
 
