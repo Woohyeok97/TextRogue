@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import RootProvider from '../components/shared/RootProvider';
+import NavigationBar from '@/components/shared/NavigationBar';
 
 export const metadata: Metadata = {
   title: 'prototype',
@@ -11,9 +12,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <main className="max-w-3xl min-h-screen mx-auto">
-          <RootProvider>{children}</RootProvider>
-        </main>
+        <RootProvider>
+          <main className="max-w-6xl min-h-screen mx-auto">
+            <NavigationBar />
+            <div className="flex justify-center py-16">{children}</div>
+          </main>
+        </RootProvider>
         <div id="overlay" />
       </body>
     </html>

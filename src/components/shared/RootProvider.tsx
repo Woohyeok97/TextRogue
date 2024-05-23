@@ -1,6 +1,7 @@
 'use client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { OverlayContextProvider } from '@/context/OverlayContext';
+import { SessionProvider } from 'next-auth/react';
 
 interface RootProviderProps {
   children: React.ReactNode;
@@ -17,7 +18,9 @@ export default function RootProvider({ children }: RootProviderProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <OverlayContextProvider>{children}</OverlayContextProvider>
+      <SessionProvider>
+        <OverlayContextProvider>{children}</OverlayContextProvider>
+      </SessionProvider>
     </QueryClientProvider>
   );
 }

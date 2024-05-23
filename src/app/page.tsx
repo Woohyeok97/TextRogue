@@ -8,7 +8,6 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Main</h1>
       <div className="flex flex-col justify-between gap-5">
         {scenarioList.map(item => (
           <ScenarioItem key={item._id} scenario={item} />
