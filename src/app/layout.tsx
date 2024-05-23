@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RootProvider>
           <main className="max-w-6xl min-h-screen mx-auto">
             <NavigationBar />
-            {children}
+            <div className="flex justify-center py-16">{children}</div>
           </main>
         </RootProvider>
         <div id="overlay" />
