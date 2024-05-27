@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 // components
 import { Spacing } from '@/components/shared/Spacing';
+import ScenarioPlay from '@/components/shared/ScenarioPlay';
 // remotes
 import { getScenarioById } from '@/remotes/mongodb/server/scenario';
 
@@ -9,6 +12,7 @@ interface ScenarioDetailProps {
   params: { id: string };
 }
 export default async function ScenarioDetail({ params }: ScenarioDetailProps) {
+  const session = await getServerSession(authOptions);
   const scenario = await getScenarioById(params.id);
 
   return (
@@ -28,11 +32,7 @@ export default async function ScenarioDetail({ params }: ScenarioDetailProps) {
             <h1 className="block text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline">
               {scenario.title}
             </h1>
-            <Link href={`/story/${scenario._id}`}>
-              <button className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                Play
-              </button>
-            </Link>
+            <ScenarioPlay scenario={scenario} userId={session?.user.id} />
           </div>
           <div className="flex gap-3">
             <Link

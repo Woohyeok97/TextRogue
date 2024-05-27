@@ -1,21 +1,25 @@
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { redirect } from 'next/navigation';
 // components
 import StoryAdvancer from '@/components/story/StoryAdvancer';
-import { Spacing } from '@/components/shared/Spacing';
 // remotes
-import { getScenarioById } from '@/remotes/mongodb/server/scenario';
+import { getStoryById } from '@/remotes/mongodb/server/story';
 
 interface ScenarioPlayProps {
   params: { id: string };
 }
 export default async function StoryPage({ params }: ScenarioPlayProps) {
-  const scenario = await getScenarioById(params.id);
-  // console.log(scenario);
+  const session = await getServerSession(authOptions);
+  const storyLog = await getStoryById(params.id);
+
+  if (!session?.user && session?.user.id !== storyLog.userId) {
+    return redirect('/login');
+  }
+
   return (
     <main>
-      <h1>ScenarioPlay</h1>
-      <Spacing size="lg" />
-      <StoryAdvancer scenario={scenario} />
-      <Spacing size="lg" />
+      <StoryAdvancer story={storyLog} />
     </main>
   );
 }
