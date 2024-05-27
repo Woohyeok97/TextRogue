@@ -4,11 +4,11 @@ import { Spacing } from '../shared/Spacing';
 // type
 import { StoryFormatType } from '@/models';
 
-interface StoryItemProps {
+interface StoryFormatProps {
   story: StoryFormatType;
   onClick: (choice: string) => void;
 }
-export default function StoryItem({ story, onClick }: StoryItemProps) {
+export default function StoryFormat({ story, onClick }: StoryFormatProps) {
   return (
     <div>
       <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">

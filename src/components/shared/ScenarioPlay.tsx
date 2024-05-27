@@ -4,7 +4,7 @@ import { Button } from './Button';
 // type
 import { ScenarioType } from '@/models';
 // remotes
-import { createStoryLog } from '@/remotes/mongodb/client/story';
+import { createStory } from '@/remotes/mongodb/client/story';
 import { useRouter } from 'next/navigation';
 
 interface ScenarioPlayProps {
@@ -18,7 +18,7 @@ export default function ScenarioPlay({ scenario, userId }: ScenarioPlayProps) {
       return alert('로그인 이후 이용해주세요.');
     }
     if (scenario._id) {
-      const result = await createStoryLog({
+      const result = await createStory({
         scenarioId: scenario._id,
         title: scenario.title,
         genre: scenario.genre,
