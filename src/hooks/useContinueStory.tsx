@@ -20,10 +20,10 @@ export default function useContinueStory({ story }: { story: StoryType }) {
         storyId: story._id!,
         storyLog: [...story.log, nextStory],
       });
+      return nextStory;
     },
-    onSuccess: () => {
-      console.log(story._id);
-      queryClient.invalidateQueries({ queryKey: ['story', story._id!] });
+    onSuccess: nextStory => {
+      queryClient.setQueryData(['story', story._id], (prev: StoryType) => ({ ...prev, log: [...prev.log, nextStory] }));
     },
     onError: error => {
       console.log(error);
