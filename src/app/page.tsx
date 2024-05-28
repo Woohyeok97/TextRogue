@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <main>
-      {userStoryList && (
+      {userStoryList && userStoryList.length !== 0 && (
         <div className="flex flex-col justify-between gap-5">
           <Text size="xl">이어서 하기</Text>
           {userStoryList.map(item => (

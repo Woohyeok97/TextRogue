@@ -15,5 +15,6 @@ export const getUserStoryList = async (userId: string): Promise<StoryType[]> => 
 export const getStoryById = async (storyId: string): Promise<StoryType> => {
   const db = (await connectDB).db('prototype');
   const response = await db.collection('story').findOne({ _id: new ObjectId(storyId) });
+  console.log('스토리 (서버) fetch 요청 실행됨!!', storyId);
   return StorySchema.parse({ ...response, _id: response?._id.toString() });
 };

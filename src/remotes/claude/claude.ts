@@ -12,8 +12,8 @@ export const generatePrologue = async ({
   world: string;
 }): Promise<StoryFormatType> => {
   const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE_PROLOGUE}`, { genre, world });
-  const prologue = StoryFormatSchema.parse(JSON.parse(response.data));
-  return prologue;
+  console.log('클로드 프롤로그 작성 generatePrologue 실행됨!');
+  return StoryFormatSchema.parse(JSON.parse(response.data));
 };
 
 // 스토리 진행 (with Claude)
@@ -21,6 +21,6 @@ export const continueStory = async (prompt: ClaudePromptType): Promise<StoryForm
   const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE_CONTINUE}`, {
     ...ClaudePromptSchema.parse(prompt),
   });
-  const nextStory = StoryFormatSchema.parse(JSON.parse(response.data));
-  return nextStory;
+  console.log('클로드 스토리 작성 실행됨!!', prompt);
+  return StoryFormatSchema.parse(JSON.parse(response.data));
 };
