@@ -3,9 +3,16 @@ interface TextProps {
   align?: keyof typeof alignOptions;
   color?: keyof typeof colorOptions;
   size?: keyof typeof sizeOptions;
+  weigth?: keyof typeof weigthOptions;
 }
-export function Text({ children, align = 'left', color = 'white', size = 'base' }: TextProps) {
-  return <span className={`${alignOptions[align]} ${colorOptions[color]} ${sizeOptions[size]} block`}>{children}</span>;
+export function Text({ children, align = 'left', color = 'white', size = 'base', weigth = 'normal' }: TextProps) {
+  return (
+    <span
+      className={`${alignOptions[align]} ${colorOptions[color]} ${sizeOptions[size]} ${weigthOptions[weigth]} block`}
+    >
+      {children}
+    </span>
+  );
 }
 
 const alignOptions = {
@@ -27,4 +34,11 @@ const sizeOptions = {
   md: 'text-md',
   lg: 'text-lg',
   xl: 'text-xl',
+};
+
+const weigthOptions = {
+  light: 'font-light',
+  normal: 'font-normal',
+  bold: 'font-bold',
+  black: 'font-black',
 };

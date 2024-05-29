@@ -35,3 +35,10 @@ export const ScenarioSchema = z.object({
   prologue: StoryFormatSchema,
   description: z.string().min(1, { message: '설명을 작성해주세요.' }),
 });
+
+// 북마크 스키마
+export const BookmarkSchema = z.object({
+  _id: z.string(),
+  scenarioId: z.string().min(1),
+  userId: z.string().min(1),
+});
