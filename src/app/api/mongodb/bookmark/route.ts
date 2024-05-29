@@ -11,3 +11,11 @@ export async function GET(req: NextRequest) {
   // return Response.json(userId);
   return Response.json(result);
 }
+
+export async function POST(req: NextRequest) {
+  const { userId, scenarioId } = await req.json();
+  const db = (await connectDB).db('prototype');
+  const result = await db.collection('bookmark').insertOne({ userId, scenarioId });
+  // return Response.json(userId);
+  return Response.json(result);
+}
