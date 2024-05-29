@@ -1,16 +1,27 @@
+import Image from 'next/image';
 // components
 import { Spacing } from '../shared/Spacing';
 // type
-import { StoryType } from '@/models';
+import { StoryFormatType } from '@/models';
 
-interface StoryItemProps {
-  story: StoryType;
+interface StoryFormatProps {
+  story: StoryFormatType;
   onClick: (choice: string) => void;
 }
-export default function StoryItem({ story, onClick }: StoryItemProps) {
+export default function StoryFormat({ story, onClick }: StoryFormatProps) {
   return (
     <div>
-      <div className="bg-gray-500 rounded-full w-10 h-10" />
+      <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+        <Image
+          width={100}
+          height={100}
+          sizes="100%"
+          src="/올라프.webp"
+          className="object-cover w-full h-full"
+          alt="avatar"
+        />
+      </div>
+
       <Spacing />
       <div>{story.text}</div>
       <Spacing size="sm" />

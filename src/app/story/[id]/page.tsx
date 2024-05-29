@@ -1,21 +1,37 @@
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { redirect } from 'next/navigation';
 // components
 import StoryAdvancer from '@/components/story/StoryAdvancer';
-import { Spacing } from '@/components/shared/Spacing';
 // remotes
-import { getScenarioById } from '@/remotes/mongodb/server/scenario';
+import { getStoryById } from '@/remotes/mongodb/server/story';
+// types
+import { StoryType } from '@/models';
 
 interface ScenarioPlayProps {
   params: { id: string };
 }
 export default async function StoryPage({ params }: ScenarioPlayProps) {
-  const scenario = await getScenarioById(params.id);
-  // console.log(scenario);
+  const session = await getServerSession(authOptions);
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery<StoryType>({
+    queryKey: ['story', params.id],
+    queryFn: () => getStoryById(params.id),
+  });
+
+  const story = queryClient.getQueryData<StoryType>(['story', params.id]);
+
+  if (!session?.user.id || session.user.id !== story?.userId) {
+    return redirect('/');
+  }
+
   return (
-    <main>
-      <h1>ScenarioPlay</h1>
-      <Spacing size="lg" />
-      <StoryAdvancer scenario={scenario} />
-      <Spacing size="lg" />
+    <main className="max-w-2xl">
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <StoryAdvancer storyId={params.id} />
+      </HydrationBoundary>
     </main>
   );
 }
