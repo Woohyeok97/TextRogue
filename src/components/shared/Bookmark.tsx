@@ -12,41 +12,55 @@ interface BookmarkProps {
 export default function Bookmark({ scenarioId, userId }: BookmarkProps) {
   const getBookmark = async () => {
     const response = await axios.get(`/api/mongodb/bookmark`, { params: { scenarioId, userId } });
-    console.log(scenarioId, 'Bookmark fetching 실행됨!!');
     return response.data;
   };
   const createBookmark = async () => {
     const response = await axios.post(`/api/mongodb/bookmark`, { scenarioId, userId });
-    console.log(scenarioId, 'Bookmark 생성 실행됨!!');
-    return response.data;
+    console.log(scenarioId, 'Bookmark 생성 실행됨!!', response.data.insertedId);
+    return response.data.insertedId;
   };
   const removeBookmark = async (bookmarkId: string) => {
     const response = await axios.delete(`/api/mongodb/bookmark/${bookmarkId}`);
-    console.log(scenarioId, 'Bookmark 삭제 실행됨!!');
+    console.log(scenarioId, 'Bookmark 삭제 실행됨!!', response.data);
     return response.data;
   };
 
   const queryClient = useQueryClient();
 
-  const { data: bookmark } = useQuery<BookmarkType>({
+  const { data: bookmark } = useQuery<BookmarkType | null>({
     queryKey: ['bookmark', scenarioId, userId],
     queryFn: getBookmark,
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
+    onMutate: () => {
+      const previousBookmark = queryClient.getQueryData(['bookmark', scenarioId, userId]);
+      return { previousBookmark };
+    },
     mutationFn: async () => {
       if (!bookmark) {
-        return await createBookmark();
+        const insertedId = await createBookmark();
+        const bookmark: BookmarkType = {
+          _id: insertedId,
+          scenarioId: scenarioId,
+          userId: userId,
+        };
+        return bookmark;
       }
-      return await removeBookmark(bookmark._id);
+      await removeBookmark(bookmark._id);
+      return null;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['bookmark', scenarioId, userId] });
+    onSuccess: bookmark => {
+      queryClient.setQueryData(['bookmark', scenarioId, userId], bookmark);
+    },
+    onError: (err, _, context) => {
+      console.log(err);
+      queryClient.setQueryData(['bookmark', scenarioId, userId], context?.previousBookmark);
     },
   });
 
   return (
-    <Button color={bookmark ? 'blue' : 'gray'} onClick={mutate}>
+    <Button color={bookmark ? (isPending ? 'gray' : 'blue') : isPending ? 'blue' : 'gray'} onClick={mutate}>
       Bookmark
     </Button>
   );
