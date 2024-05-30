@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 // type
 import { BookmarkType } from '@/models';
 // remotes
-import { createBookmark, getBookmark, removeBookmark } from '@/remotes/mongodb/client/bookmark';
+import { createBookmark, removeBookmark } from '@/remotes/mongodb/client/bookmark';
 
 export default function useBookmark({ scenarioId, userId }: { scenarioId: string; userId: string }) {
   const queryClient = useQueryClient();
@@ -10,7 +10,6 @@ export default function useBookmark({ scenarioId, userId }: { scenarioId: string
   // 북마크 데이터
   const { data: bookmark } = useQuery<BookmarkType | null>({
     queryKey: ['bookmark', scenarioId, userId],
-    queryFn: () => getBookmark({ scenarioId, userId }),
   });
 
   // 북마크 mutation

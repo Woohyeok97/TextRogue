@@ -11,8 +11,13 @@ interface BookmarkProps {
 export default function Bookmark({ scenarioId, userId }: BookmarkProps) {
   const { bookmark, mutate, isPending } = useBookmark({ scenarioId, userId });
 
+  // 북마크 핸들러
+  const handleClick = () => {
+    if (!isPending) mutate();
+  };
+
   return (
-    <Button color={bookmark ? (isPending ? 'gray' : 'blue') : isPending ? 'blue' : 'gray'} onClick={mutate}>
+    <Button color={bookmark ? (isPending ? 'gray' : 'blue') : isPending ? 'blue' : 'gray'} onClick={handleClick}>
       Bookmark
     </Button>
   );

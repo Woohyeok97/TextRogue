@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
 import { Text } from './Text';
 import Bookmark from './Bookmark';
@@ -16,6 +17,14 @@ interface ScenarioItemProps {
 export default async function ScenarioItem({ scenario }: ScenarioItemProps) {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
+  const queryClient = new QueryClient();
+
+  if (scenario._id && userId) {
+    await queryClient.prefetchQuery({
+      queryKey: ['bookmark', scenario._id, userId],
+      queryFn: () => getUserBookmark({ scenarioId: scenario._id!, userId }),
+    });
+  }
 
   return (
     <div className="max-w-2xl px-8 py-5 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -59,7 +68,11 @@ export default async function ScenarioItem({ scenario }: ScenarioItemProps) {
           </div>
           <Text weigth="bold">고나우</Text>
         </Link>
-        {userId && scenario._id && <Bookmark scenarioId={scenario._id} userId={userId} />}
+        {userId && scenario._id && (
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Bookmark scenarioId={scenario._id} userId={userId} />
+          </HydrationBoundary>
+        )}
       </div>
     </div>
   );

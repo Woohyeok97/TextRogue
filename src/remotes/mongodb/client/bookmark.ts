@@ -1,22 +1,22 @@
 import axios from 'axios';
 // type & schema
-import { BookmarkType } from '@/models';
-import { BookmarkSchema } from '@/remotes/schema';
+// import { BookmarkType } from '@/models';
+// import { BookmarkSchema } from '@/remotes/schema';
 
 // 북마크 가져오기
-export const getBookmark = async ({
-  scenarioId,
-  userId,
-}: {
-  scenarioId: string;
-  userId: string;
-}): Promise<BookmarkType | null> => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BOOKMARK}`, { params: { scenarioId, userId } });
-  if (response.data) {
-    return BookmarkSchema.parse(response.data);
-  }
-  return null;
-};
+// export const getBookmark = async ({
+//   scenarioId,
+//   userId,
+// }: {
+//   scenarioId: string;
+//   userId: string;
+// }): Promise<BookmarkType | null> => {
+//   const response = await axios.get(`${process.env.NEXT_PUBLIC_BOOKMARK}`, { params: { scenarioId, userId } });
+//   if (response.data) {
+//     return BookmarkSchema.parse(response.data);
+//   }
+//   return null;
+// };
 
 // 북마크 생성
 export const createBookmark = async ({

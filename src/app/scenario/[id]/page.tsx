@@ -2,18 +2,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
 import { Spacing } from '@/components/shared/Spacing';
 import ScenarioPlay from '@/components/shared/ScenarioPlay';
+import Bookmark from '@/components/shared/Bookmark';
 // remotes
 import { getScenarioById } from '@/remotes/mongodb/server/scenario';
+import { getUserBookmark } from '@/remotes/mongodb/server/bookmark';
 
-interface ScenarioDetailProps {
+interface ScenarioPageProps {
   params: { id: string };
 }
-export default async function ScenarioDetail({ params }: ScenarioDetailProps) {
+export default async function ScenarioPage({ params }: ScenarioPageProps) {
   const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   const scenario = await getScenarioById(params.id);
+  const queryClient = new QueryClient();
+
+  if (scenario._id && userId) {
+    await queryClient.prefetchQuery({
+      queryKey: ['bookmark', scenario._id, userId],
+      queryFn: () => getUserBookmark({ scenarioId: scenario._id!, userId }),
+    });
+  }
 
   return (
     <main>
@@ -32,22 +44,30 @@ export default async function ScenarioDetail({ params }: ScenarioDetailProps) {
             <h1 className="block text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline">
               {scenario.title}
             </h1>
-            <ScenarioPlay scenario={scenario} userId={session?.user.id} />
+            <ScenarioPlay scenario={scenario} userId={userId} />
           </div>
-          <div className="flex gap-3">
-            <Link
-              href="#"
-              className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
-            >
-              {scenario.genre}
-            </Link>
-            <Link
-              href="#"
-              className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
-            >
-              {scenario.world}
-            </Link>
+          <div className="flex justify-between items-center">
+            <div className="flex gap-3">
+              <Link
+                href="#"
+                className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+              >
+                {scenario.genre}
+              </Link>
+              <Link
+                href="#"
+                className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+              >
+                {scenario.world}
+              </Link>
+            </div>
+            {userId && scenario._id && (
+              <HydrationBoundary state={dehydrate(queryClient)}>
+                <Bookmark scenarioId={scenario._id} userId={userId} />
+              </HydrationBoundary>
+            )}
           </div>
+
           <Spacing />
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{scenario.prologue.text}</p>
           <Spacing />
