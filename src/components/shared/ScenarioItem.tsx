@@ -16,9 +16,6 @@ interface ScenarioItemProps {
 export default async function ScenarioItem({ scenario }: ScenarioItemProps) {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
-  // const bookmark = session?.user.id
-  //   ? await getUserBookmark({ scenarioId: scenario._id!, userId: session.user.id })
-  //   : null;
 
   return (
     <div className="max-w-2xl px-8 py-5 bg-white rounded-lg shadow-md dark:bg-gray-800">
