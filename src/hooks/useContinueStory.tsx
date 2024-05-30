@@ -25,8 +25,8 @@ export default function useContinueStory({ story }: { story: StoryType }) {
     onSuccess: nextStory => {
       queryClient.setQueryData(['story', story._id], (prev: StoryType) => ({ ...prev, log: [...prev.log, nextStory] }));
     },
-    onError: error => {
-      console.log(error);
+    onError: err => {
+      alert(`Story 진행 에러발생, 다시 시도해주세요. : ${err.message}`);
     },
   });
 }
