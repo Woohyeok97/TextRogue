@@ -1,7 +1,14 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
+import { checkUserAICall } from '@/remotes/mongodb/server/checkUserAICall';
 
 export async function POST(req: NextRequest) {
+  const { isValid, response } = await checkUserAICall();
+
+  if (!isValid) {
+    return response;
+  }
+
   try {
     const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_SECRET_KEY });
     const body = await req.json();
@@ -62,6 +69,7 @@ export async function POST(req: NextRequest) {
     console.log(message);
     return Response.json(message.content[0].text);
   } catch (err) {
+    // console.log(err);
     return new Response(JSON.stringify({ message: err }), { status: 500 });
   }
 }
