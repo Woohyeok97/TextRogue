@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 // components
-import { Input } from '../shared/Input';
-import { Text } from '../shared/Text';
-import { TextArea } from '../shared/TextArea';
-import { Button } from '../shared/Button';
+import { Input } from '../shared/ui/Input';
+import { Text } from '../shared/ui/Text';
+import { TextArea } from '../shared/ui/TextArea';
+import { Button } from '../shared/ui/Button';
 import BottomSheet from '../shared/ui/Bottomsheet';
 import ScenarioPreview from './ScenarioPreview';
 // hooks

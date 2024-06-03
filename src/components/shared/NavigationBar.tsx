@@ -3,13 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import UserAICount from './UserAICount';
 
 export default function NavigationBar() {
-  const { data: sesstion, status } = useSession();
+  const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    if (status === 'authenticated' && sesstion) {
+    if (status === 'authenticated' && session) {
       return signOut();
     }
     return signIn();
@@ -70,29 +71,24 @@ export default function NavigationBar() {
               isOpen ? 'translate-x-0 opacity-100' : 'opacity-0 -translate-x-full'
             }`}
           >
-            <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-              <Link
-                href="/scenario/create"
-                className="px-3 py-2 mx-3 mt-2 duration-300 rounded-md lg:mt-0 text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                시나리오 생성
-              </Link>
+            <div className="flex gap-5 items-center">
+              {session?.user.id && <UserAICount userId={session.user.id} />}
+              <button onClick={handleClick} className="flex items-center">
+                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                  {status !== 'loading' && (
+                    <Image
+                      width={100}
+                      height={100}
+                      sizes="100%"
+                      src={session ? `${session.user?.image}` : '/방문자_아바타.jpeg'}
+                      className="object-cover w-full h-full"
+                      alt="avatar"
+                    />
+                  )}
+                </div>
+                <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">{session?.user?.name}</h3>
+              </button>
             </div>
-            <button onClick={handleClick} className="flex items-center">
-              <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                {status !== 'loading' && (
-                  <Image
-                    width={100}
-                    height={100}
-                    sizes="100%"
-                    src={sesstion ? `${sesstion.user?.image}` : '/방문자_아바타.jpeg'}
-                    className="object-cover w-full h-full"
-                    alt="avatar"
-                  />
-                )}
-              </div>
-              <h3 className="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">{sesstion?.user?.name}</h3>
-            </button>
           </div>
         </div>
       </div>

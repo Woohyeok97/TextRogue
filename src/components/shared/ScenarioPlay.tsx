@@ -1,6 +1,6 @@
 'use client';
 // components
-import { Button } from './Button';
+import { Button } from './ui/Button';
 // type
 import { ScenarioType } from '@/models';
 // remotes

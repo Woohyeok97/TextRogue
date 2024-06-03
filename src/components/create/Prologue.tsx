@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useFormContext } from 'react-hook-form';
 // components
-import { Input } from '../shared/Input';
-import { Button } from '../shared/Button';
-import { TextArea } from '../shared/TextArea';
-import { Text } from '../shared/Text';
+import { Input } from '../shared/ui/Input';
+import { Button } from '../shared/ui/Button';
+import { TextArea } from '../shared/ui/TextArea';
+import { Text } from '../shared/ui/Text';
 // type
 import { ScenarioType } from '@/models';
 // remotes
@@ -22,6 +22,7 @@ export default function Prologue({ onNext }: PrologueProps) {
     trigger,
     formState: { errors },
   } = useFormContext<ScenarioType>();
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
@@ -30,6 +31,8 @@ export default function Prologue({ onNext }: PrologueProps) {
     },
     onSuccess: prologue => {
       setValue('prologue', prologue);
+      // 유저 AI 카운트 업데이트 (쿼리키 초기화)
+      queryClient.invalidateQueries({ queryKey: ['userAICount'] });
     },
     onError: err => {
       console.log(err);

@@ -3,8 +3,8 @@ import { authOptions } from './api/auth/[...nextauth]/route';
 // components
 import ScenarioItem from '@/components/shared/ScenarioItem';
 import StoryItem from '@/components/shared/StoryItem';
-import { Text } from '@/components/shared/Text';
-import { Spacing } from '@/components/shared/Spacing';
+import { Text } from '@/components/shared/ui/Text';
+import { Spacing } from '@/components/shared/ui/Spacing';
 // remotes
 import { getScenarioList } from '@/remotes/mongodb/server/scenario';
 import { getUserStoryList } from '@/remotes/mongodb/server/story';

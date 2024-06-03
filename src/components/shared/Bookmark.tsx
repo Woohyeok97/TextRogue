@@ -1,6 +1,6 @@
 'use client';
 // components
-import { Button } from './Button';
+import { Button } from './ui/Button';
 // hooks
 import useBookmark from '@/hooks/useBookmark';
 
