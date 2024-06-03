@@ -21,6 +21,6 @@ export const continueStory = async (prompt: ClaudePromptType): Promise<StoryForm
   const response = await axios.post(`${process.env.NEXT_PUBLIC_CLAUDE_CONTINUE}`, {
     ...ClaudePromptSchema.parse(prompt),
   });
-  console.log('클로드 스토리 작성 실행됨!!', prompt);
+  console.log('클로드 스토리 작성 실행됨!!', prompt, response.data);
   return StoryFormatSchema.parse(JSON.parse(response.data));
 };

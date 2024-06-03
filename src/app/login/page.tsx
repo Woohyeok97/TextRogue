@@ -1,5 +1,5 @@
 import LoginButton from '@/components/shared/LoginButton';
-import { Text } from '@/components/shared/Text';
+import { Text } from '@/components/shared/ui/Text';
 
 export default function LoginPage() {
   return (

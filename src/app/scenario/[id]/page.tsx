@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
-import { Spacing } from '@/components/shared/Spacing';
+import { Spacing } from '@/components/shared/ui/Spacing';
 import ScenarioPlay from '@/components/shared/ScenarioPlay';
 import Bookmark from '@/components/shared/Bookmark';
 // remotes

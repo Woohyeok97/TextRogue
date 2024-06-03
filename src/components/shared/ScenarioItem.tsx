@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
-import { Text } from './Text';
+import { Text } from './ui/Text';
 import Bookmark from './Bookmark';
 // type
 import { ScenarioType } from '@/models';

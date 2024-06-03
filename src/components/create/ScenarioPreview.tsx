@@ -1,7 +1,7 @@
 // types
 import { ScenarioType } from '@/models';
-import { Text } from '../shared/Text';
-import { Button } from '../shared/Button';
+import { Text } from '../shared/ui/Text';
+import { Button } from '../shared/ui/Button';
 
 interface ScenarioPreviewProps {
   scenario: ScenarioType;

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 // components
-import { Spacing } from '../shared/Spacing';
+import { Spacing } from '../shared/ui/Spacing';
 // type
 import { StoryFormatType } from '@/models';
 

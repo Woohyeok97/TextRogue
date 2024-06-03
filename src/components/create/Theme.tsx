@@ -2,9 +2,9 @@ import { useFormContext } from 'react-hook-form';
 import { GENRE_LIST } from '@/constants/genres';
 import { WORLD_LIST } from '@/constants/worlds';
 // components
-import { Select } from '../shared/Select';
-import { Button } from '../shared/Button';
-import { Text } from '../shared/Text';
+import { Select } from '../shared/ui/Select';
+import { Button } from '../shared/ui/Button';
+import { Text } from '../shared/ui/Text';
 // types
 import { ScenarioType } from '@/models';
 
