@@ -7,6 +7,7 @@ import { StorySchema } from '@/remotes/schema';
 // 스토리 리스트 가져오기
 export const getUserStoryList = async (userId: string): Promise<StoryType[]> => {
   console.log('유저 스토리 리스트 fetching!');
+  await new Promise(resolve => setTimeout(resolve, 2000));
   const db = (await connectDB).db('prototype');
   const response = await db.collection('story').find({ userId: userId }).toArray();
   console.log('유저 스토리 리스트 fetching! 끝!');

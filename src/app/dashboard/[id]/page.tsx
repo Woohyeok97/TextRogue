@@ -17,9 +17,11 @@ export default async function DashBoardPage() {
     return redirect('/');
   }
 
-  const userScenarioList = await getUserScenarioList(session.user.id);
-  const userBookmarkList = await getUserBookmarkList(session.user.id);
-  const userStoryList = await getUserStoryList(session.user.id);
+  const scenarioLis = getUserScenarioList(session.user.id);
+  const bookmarkList = getUserBookmarkList(session.user.id);
+  const storyList = getUserStoryList(session.user.id);
+
+  const [userScenarioList, userBookmarkList, userStoryList] = await Promise.all([scenarioLis, bookmarkList, storyList]);
 
   return (
     <main className="max-w-2xl w-full">
