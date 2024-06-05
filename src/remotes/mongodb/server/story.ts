@@ -6,8 +6,10 @@ import { StorySchema } from '@/remotes/schema';
 
 // 스토리 리스트 가져오기
 export const getUserStoryList = async (userId: string): Promise<StoryType[]> => {
+  console.log('유저 스토리 리스트 fetching!');
   const db = (await connectDB).db('prototype');
   const response = await db.collection('story').find({ userId: userId }).toArray();
+  console.log('유저 스토리 리스트 fetching! 끝!');
   return response.map(item => StorySchema.parse({ ...item, _id: item._id.toString() }));
 };
 
