@@ -39,7 +39,10 @@ jobs:
 
       - name: ESLint
         run: yarn lint
-  
+      
+      - name: Prettier fix
+        run: yarn prettier:write
+      
       - name: Prettier
         run: yarn prettier:check
       
