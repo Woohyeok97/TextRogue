@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 import { redirect } from 'next/navigation';
 // components

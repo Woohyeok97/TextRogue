@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
 import { Spacing } from '@/components/shared/ui/Spacing';
