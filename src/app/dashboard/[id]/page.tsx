@@ -2,13 +2,13 @@ import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 // components
-import ScenarioItem from '@/components/shared/ScenarioItem';
-import StoryItem from '@/components/shared/StoryItem';
+import UserBookmarkList from '@/components/dashboard/UserBookmarkList';
+import UserStoryList from '@/components/dashboard/UserStoryList';
+import UserScenarioList from '@/components/dashboard/UserScenarioList';
+import { Skeleton } from '@/components/shared/ui/Skeleton';
 import { Text } from '@/components/shared/ui/Text';
-// remotes
-import { getUserBookmarkList, getUserScenarioList } from '@/remotes/mongodb/server/scenario';
-import { getUserStoryList } from '@/remotes/mongodb/server/story';
 
 export default async function DashBoardPage() {
   const session = await getServerSession(authOptions);
@@ -16,12 +16,6 @@ export default async function DashBoardPage() {
   if (!session?.user.id) {
     return redirect('/');
   }
-
-  const scenarioLis = getUserScenarioList(session.user.id);
-  const bookmarkList = getUserBookmarkList(session.user.id);
-  const storyList = getUserStoryList(session.user.id);
-
-  const [userScenarioList, userBookmarkList, userStoryList] = await Promise.all([scenarioLis, bookmarkList, storyList]);
 
   return (
     <main className="max-w-2xl w-full">
@@ -52,29 +46,16 @@ export default async function DashBoardPage() {
           My Menu 3
         </button>
       </div>
-      <div className="flex flex-col gap-3 my-8">
-        <Text size="xl">진행중인 스토리</Text>
-        {userStoryList.length ? (
-          userStoryList.map(item => <StoryItem key={item._id} story={item} />)
-        ) : (
-          <Text color="gray">진행중인 스토리가 없습니다.</Text>
-        )}
-      </div>
-      <div className="flex flex-col gap-3 my-8">
-        <Text size="xl">나의 시나리오</Text>
-        {userScenarioList.length ? (
-          userScenarioList.map(item => <ScenarioItem key={item._id} scenario={item} />)
-        ) : (
-          <Text color="gray">생성한 시나리오가 없습니다.</Text>
-        )}
-      </div>
-      <div className="flex flex-col gap-3 my-8">
-        <Text size="xl">나의 북마크</Text>
-        {userBookmarkList.length ? (
-          userBookmarkList.map(item => <ScenarioItem key={item._id} scenario={item} />)
-        ) : (
-          <Text color="gray">북마크한 시나리오가 없습니다.</Text>
-        )}
+      <div>
+        <Suspense fallback={<Skeleton />}>
+          <UserStoryList userId={session.user.id} />
+        </Suspense>
+        <Suspense fallback={<Skeleton />}>
+          <UserScenarioList userId={session.user.id} />
+        </Suspense>
+        <Suspense fallback={<Skeleton />}>
+          <UserBookmarkList userId={session.user.id} />
+        </Suspense>
       </div>
     </main>
   );

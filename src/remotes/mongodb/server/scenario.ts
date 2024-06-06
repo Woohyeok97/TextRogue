@@ -24,18 +24,21 @@ export const getScenarioById = async (id: string): Promise<ScenarioType> => {
 
 // 유저 시나리오 리스트 가져오기
 export const getUserScenarioList = async (userId: string): Promise<ScenarioType[]> => {
-  console.log('유저 시나리오 리스트 fetching!');
+  // console.log('유저 시나리오 리스트 fetching!');
+  console.time('유저 시나리오 리스트 fetching!');
   const db = (await connectDB).db('prototype');
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const result = await db.collection('scenario').find({ userId: userId }).toArray();
-  console.log('유저 시나리오 리스트 fetching! 끝!');
+  // console.log('유저 시나리오 리스트 fetching! 끝!');
+  console.timeEnd('유저 시나리오 리스트 fetching!');
   return result.map(item => ScenarioSchema.parse({ ...item, _id: item._id.toString() }));
 };
 
 // 유저 북마크 시나리오 리스트 가져오기
 export const getUserBookmarkList = async (userId: string): Promise<ScenarioType[]> => {
-  console.log('유저 북마크 리스트 fetching!');
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  // console.log('유저 북마크 리스트 fetching!');
+  console.time('유저 북마크 리스트 fetching!');
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const db = (await connectDB).db('prototype');
   const bookmarks = await db.collection('bookmark').find({ userId: userId }).toArray();
   const scenarioId = bookmarks.map(
@@ -45,6 +48,7 @@ export const getUserBookmarkList = async (userId: string): Promise<ScenarioType[
     .collection('scenario')
     .find({ _id: { $in: scenarioId } })
     .toArray();
-  console.log('유저 북마크 리스트 fetching! 끝!');
+  console.timeEnd('유저 북마크 리스트 fetching!');
+  // console.log('유저 북마크 리스트 fetching! 끝!');
   return result.map(item => ScenarioSchema.parse({ ...item, _id: item._id.toString() }));
 };
