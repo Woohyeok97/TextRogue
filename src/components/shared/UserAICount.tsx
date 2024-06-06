@@ -13,7 +13,7 @@ export default function UserAICount({ userId }: AICallCountProps) {
   });
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-1">
       <Text size="xl" weigth="bold">
         AI
       </Text>

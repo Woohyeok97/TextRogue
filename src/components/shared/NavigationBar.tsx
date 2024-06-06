@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import UserAICount from './UserAICount';
+import { Text } from './ui/Text';
 
 export default function NavigationBar() {
   const { data: session, status } = useSession();
@@ -72,7 +73,14 @@ export default function NavigationBar() {
             }`}
           >
             <div className="flex gap-5 items-center">
-              {session?.user.id && <UserAICount userId={session.user.id} />}
+              {session?.user.id && (
+                <div className="flex gap-5 items-center">
+                  <Link href={`/dashboard/${session.user.id}`}>
+                    <Text size="xl">Dashboard</Text>
+                  </Link>
+                  <UserAICount userId={session.user.id} />
+                </div>
+              )}
               <button onClick={handleClick} className="flex items-center">
                 <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                   {status !== 'loading' && (

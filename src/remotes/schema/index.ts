@@ -34,6 +34,7 @@ export const ScenarioSchema = z.object({
   world: z.string().min(1, { message: '세계관을 선택해주세요.' }),
   prologue: StoryFormatSchema,
   description: z.string().min(1, { message: '설명을 작성해주세요.' }),
+  userId: z.string().min(1),
 });
 
 // 북마크 스키마

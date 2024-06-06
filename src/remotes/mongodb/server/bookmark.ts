@@ -11,9 +11,10 @@ export const getUserBookmark = async ({
   scenarioId: string;
   userId: string;
 }): Promise<BookmarkType | null> => {
+  // console.log('북마크 아이템 fetch 실행됨!!', scenarioId);
   const db = (await connectDB).db('prototype');
   const response = await db.collection('bookmark').findOne({ scenarioId: scenarioId, userId: userId });
-  // console.log('북마크 server fetch 실행됨!!', response);
+  // console.log('북마크 아이템 fetch 끝!!', scenarioId);
   if (response) {
     return BookmarkSchema.parse({ ...response, _id: response?._id.toString() });
   }
