@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 // components
 import CreateScenario from '@/components/create/CreateScenario';
+import { Skeleton } from '@/components/shared/ui/Skeleton';
 
 export const metadata: Metadata = {
   title: '',
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
 export default function CreatePage() {
   return (
     <main>
-      <CreateScenario />
+      <Suspense fallback={<Skeleton />}>
+        <CreateScenario />
+      </Suspense>
     </main>
   );
 }

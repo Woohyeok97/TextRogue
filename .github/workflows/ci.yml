@@ -1,0 +1,52 @@
+name: CI
+
+# main branch에 push 되면 실행
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest # action이 구동될 OS 환경을 세팅
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node # action이 구동될 Node 버전을 세팅함
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.x
+      
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Set Secret ENV
+        run: echo "${{ secrets.ENV_VARS }}" > .env
+      
+      - name: Set Public ENV
+        run: |
+          echo "NEXT_PUBLIC_CLAUDE_PROLOGUE=/api/claude/prologue" >> .env
+          echo "NEXT_PUBLIC_CLAUDE_CONTINUE=/api/claude/continue" >> .env
+          echo "NEXT_PUBLIC_SCENARIO=/api/mongodb/scenario" >> .env
+          echo "NEXT_PUBLIC_STORY=/api/mongodb/story" >> .env
+          echo "NEXT_PUBLIC_BOOKMARK=/api/mongodb/bookmark" >> .env
+
+      - name: ESLint
+        run: yarn lint
+      
+      - name: Prettier fix
+        run: yarn prettier:write
+      
+      - name: Prettier
+        run: yarn prettier:check
+      
+      - name: Build project
+        run: yarn build
+      
+      
