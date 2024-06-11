@@ -1,3 +1,4 @@
+'use server';
 import { connectDB } from '../mongodb';
 import { ObjectId } from 'mongodb';
 // type & schema
@@ -18,8 +19,10 @@ export const getUserStoryList = async (userId: string): Promise<StoryType[]> => 
 
 // 스토리 단일 가져오기
 export const getStoryById = async (storyId: string): Promise<StoryType> => {
+  console.log('유저 스토리(server) fetching!', storyId);
   const db = (await connectDB).db('prototype');
   const response = await db.collection('story').findOne({ _id: new ObjectId(storyId) });
-  console.log('스토리 (서버) fetch 요청 실행됨!!', storyId);
+  console.log('유저 스토리(server) fetching 완료!!', storyId);
+  // console.log('스토리 (서버) fetch 요청 실행됨!!', storyId);
   return StorySchema.parse({ ...response, _id: response?._id.toString() });
 };

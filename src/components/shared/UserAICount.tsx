@@ -17,7 +17,7 @@ export default function UserAICount({ userId }: AICallCountProps) {
       <Text size="xl" weigth="bold">
         AI
       </Text>
-      <Text size="xl">{userAICount?.todayCount || 0} / 2</Text>
+      <Text size="xl">{userAICount?.todayCount || 0} / 5</Text>
     </div>
   );
 }

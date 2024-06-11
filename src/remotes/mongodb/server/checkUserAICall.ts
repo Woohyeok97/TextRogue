@@ -38,7 +38,7 @@ export const checkUserAICall = async (): Promise<{ isValid: boolean; response?: 
     }
 
     // 오늘 AI Call todayCount가 초과된 경우
-    if (userCall.todayCount >= 2) {
+    if (userCall.todayCount >= 5) {
       return {
         isValid: false,
         response: NextResponse.json({ message: '일일 횟수가 초과되었습니다.' }, { status: 429 }),
