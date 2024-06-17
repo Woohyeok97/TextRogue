@@ -1,14 +1,22 @@
-interface TextProps {
+interface TextProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   align?: keyof typeof alignOptions;
   color?: keyof typeof colorOptions;
   size?: keyof typeof sizeOptions;
   weigth?: keyof typeof weigthOptions;
 }
-export function Text({ children, align = 'left', color = 'white', size = 'base', weigth = 'normal' }: TextProps) {
+export function Text({
+  children,
+  align = 'left',
+  color = 'white',
+  size = 'base',
+  weigth = 'normal',
+  ...props
+}: TextProps) {
   return (
     <span
       className={`${alignOptions[align]} ${colorOptions[color]} ${sizeOptions[size]} ${weigthOptions[weigth]} block`}
+      {...props}
     >
       {children}
     </span>
