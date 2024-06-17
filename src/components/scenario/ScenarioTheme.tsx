@@ -2,28 +2,20 @@ import { useFormContext } from 'react-hook-form';
 import { GENRE_LIST } from '@/constants/genres';
 import { WORLD_LIST } from '@/constants/worlds';
 // components
-import { Select } from '../shared/ui/Select';
+import Select from '../shared/ui/Select';
 import { Button } from '../shared/ui/Button';
 import { Text } from '../shared/ui/Text';
 // types
 import { ScenarioType } from '@/models';
 
-interface ThemeProps {
+interface ScenarioThemeProps {
   onNext: () => void;
 }
-export default function Theme({ onNext }: ThemeProps) {
+export default function ScenarioTheme({ onNext }: ScenarioThemeProps) {
   const {
     register,
-    trigger,
     formState: { errors },
   } = useFormContext<ScenarioType>();
-
-  const handleClick = async () => {
-    const isValid = await trigger(['genre', 'world']);
-    if (isValid) {
-      onNext();
-    }
-  };
 
   return (
     <div className="flex flex-col gap-10">
@@ -52,7 +44,7 @@ export default function Theme({ onNext }: ThemeProps) {
         ))}
       </Select>
       {errors.world && <Text color="orangered">{errors.world.message}</Text>}
-      <Button onClick={handleClick}>다음</Button>
+      <Button onClick={onNext}>다음</Button>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 // components
-import CreateScenario from '@/components/create/CreateScenario';
+import CreateScenario from '@/components/scenario/CreateScenario';
 import { Skeleton } from '@/components/shared/ui/Skeleton';
 import PageLayout from '@/components/shared/ui/PageLayout';
 

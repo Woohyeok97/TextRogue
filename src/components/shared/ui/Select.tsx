@@ -4,7 +4,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select({ label, ...props }, ref) {
+const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select({ label, ...props }, ref) {
   return (
     <div className="flex flex-col">
       {label && (
@@ -21,3 +21,5 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     </div>
   );
 });
+
+export default Select;

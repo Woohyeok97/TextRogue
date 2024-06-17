@@ -41,7 +41,7 @@ export default function Prologue({ onNext }: PrologueProps) {
 
   useEffect(() => {
     if (getValues('genre') && getValues('world') && !getValues('prologue.text')) {
-      mutate();
+      // mutate();
     }
   }, [getValues, mutate]);
 
