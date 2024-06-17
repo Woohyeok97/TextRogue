@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
+import PageLayout from '@/components/shared/ui/PageLayout';
 import { Spacing } from '@/components/shared/ui/Spacing';
 import ScenarioPlay from '@/components/shared/ScenarioPlay';
 import Bookmark from '@/components/shared/Bookmark';
@@ -28,7 +29,7 @@ export default async function ScenarioPage({ params }: ScenarioPageProps) {
   }
 
   return (
-    <main>
+    <PageLayout width="xl">
       <div className="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
         <Image
           width={100}
@@ -74,6 +75,6 @@ export default async function ScenarioPage({ params }: ScenarioPageProps) {
           <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">{scenario.description}</p>
         </div>
       </div>
-    </main>
+    </PageLayout>
   );
 }

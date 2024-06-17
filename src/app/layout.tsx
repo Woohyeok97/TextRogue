@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+// components
 import RootProvider from '../components/shared/RootProvider';
 import NavigationBar from '@/components/shared/NavigationBar';
 

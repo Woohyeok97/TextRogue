@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/authOptions';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 // components
+import PageLayout from '@/components/shared/ui/PageLayout';
 import UserBookmarkList from '@/components/dashboard/UserBookmarkList';
 import UserStoryList from '@/components/dashboard/UserStoryList';
 import UserScenarioList from '@/components/dashboard/UserScenarioList';
@@ -18,7 +19,7 @@ export default async function DashBoardPage() {
   }
 
   return (
-    <main className="max-w-2xl w-full">
+    <PageLayout>
       <div className="flex items-center gap-3 mb-8">
         <div className="w-10 h-10 overflow-hidden rounded-full">
           <Image
@@ -57,6 +58,6 @@ export default async function DashBoardPage() {
           <UserBookmarkList userId={session.user.id} />
         </Suspense>
       </div>
-    </main>
+    </PageLayout>
   );
 }
