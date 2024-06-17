@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 // components
+import PageLayout from '@/components/shared/ui/PageLayout';
 import ScenarioItem from '@/components/shared/ScenarioItem';
 import StoryItem from '@/components/shared/StoryItem';
 import { Text } from '@/components/shared/ui/Text';
@@ -15,7 +16,7 @@ export default async function Home() {
   const userStoryList = session?.user.id ? await getUserStoryList(session.user.id) : null;
 
   return (
-    <main>
+    <PageLayout>
       {userStoryList && userStoryList.length !== 0 && (
         <div className="flex flex-col justify-between gap-5">
           <Text size="xl">이어서 하기</Text>
@@ -31,6 +32,6 @@ export default async function Home() {
           <ScenarioItem key={item._id} scenario={item} />
         ))}
       </div>
-    </main>
+    </PageLayout>
   );
 }

@@ -6,7 +6,9 @@ import StoryFormat from './StoryFormat';
 import { StoryType } from '@/models';
 // hooks
 import useContinueStory from '@/hooks/useContinueStory';
+// remotes
 import { getStoryById } from '@/remotes/mongodb/server/story';
+import { Skeleton } from '../shared/ui/Skeleton';
 
 interface StoryAdvancerProps {
   storyId: string;
@@ -24,11 +26,10 @@ export default function StoryAdvancer({ storyId }: StoryAdvancerProps) {
     continueStory.mutate(choice);
   };
 
-  console.log('storyadvacer');
-
   return (
     <div className="flex flex-col justify-between gap-10">
       {story?.log.map((item, i) => <StoryFormat key={i} story={item} onClick={handleClick} />)}
+      {continueStory.isPending && <Skeleton />}
     </div>
   );
 }
