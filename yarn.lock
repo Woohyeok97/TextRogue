@@ -358,6 +358,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-devtools@npm:5.37.1":
+  version: 5.37.1
+  resolution: "@tanstack/query-devtools@npm:5.37.1"
+  checksum: 10c0/c52c320972e2b430da69f18295ddb2c62ea5c3c1b83481b225be799f7e955e32782d68871bddc141acc468cf4d7ad5dcdd2c88ff3edc90021d28e57252dfab8b
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^5.40.1":
+  version: 5.40.1
+  resolution: "@tanstack/react-query-devtools@npm:5.40.1"
+  dependencies:
+    "@tanstack/query-devtools": "npm:5.37.1"
+  peerDependencies:
+    "@tanstack/react-query": ^5.40.1
+    react: ^18 || ^19
+  checksum: 10c0/3cc9b5cc90e82c787cef25f73ee55e67df842b63e0c7e57a27d3ed15d8e3c2a8395e80fe6174bd71a5723fa066e40288f3cbf9791d243b485ea2003aaca36d3a
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query@npm:^5.34.2":
   version: 5.34.2
   resolution: "@tanstack/react-query@npm:5.34.2"
@@ -3745,6 +3764,7 @@ __metadata:
     "@anthropic-ai/sdk": "npm:^0.20.8"
     "@hookform/resolvers": "npm:^3.3.4"
     "@tanstack/react-query": "npm:^5.34.2"
+    "@tanstack/react-query-devtools": "npm:^5.40.1"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
