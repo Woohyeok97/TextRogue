@@ -21,7 +21,6 @@ export default async function StoryPage({ params }: ScenarioPlayProps) {
     queryFn: () => getStoryById(params.id),
   });
 
-  console.log('parent!');
   const story = queryClient.getQueryData<StoryType>(['story', params.id]);
 
   if (!session?.user.id || session.user.id !== story?.userId) {
