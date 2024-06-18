@@ -3,10 +3,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   color?: keyof typeof colorOptions;
   size?: keyof typeof sizeOptions;
+  width?: keyof typeof widthOptions;
 }
-export function Button({ children, onClick, color = 'blue', size = 'base', ...props }: ButtonProps) {
+export function Button({ children, onClick, color = 'blue', size = 'base', width = 'auto', ...props }: ButtonProps) {
   return (
-    <button className={`px-6 py-2 rounded-lg ${colorOptions[color]} ${sizeOptions[size]}`} onClick={onClick} {...props}>
+    <button
+      className={`px-6 py-2 rounded-lg ${colorOptions[color]} ${sizeOptions[size]} ${widthOptions[width]}`}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );
@@ -26,4 +31,9 @@ const sizeOptions = {
   md: 'text-md',
   lg: 'text-lg',
   xl: 'text-xl',
+};
+
+const widthOptions = {
+  auto: 'w-auto',
+  full: 'w-full',
 };

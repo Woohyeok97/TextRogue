@@ -26,6 +26,7 @@ export function Text({
 const alignOptions = {
   left: 'text-left',
   center: 'text-center',
+  right: 'text-right',
 };
 
 const colorOptions = {
@@ -42,6 +43,7 @@ const sizeOptions = {
   md: 'text-md',
   lg: 'text-lg',
   xl: 'text-xl',
+  max: 'text-2xl',
 };
 
 const weigthOptions = {

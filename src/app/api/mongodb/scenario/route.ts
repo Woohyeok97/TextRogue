@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     console.log(formData);
     const result = await db.collection('scenario').insertOne(formData);
-    return Response.json('create scenario!');
+    return Response.json(result);
   } catch (err) {
     return new Response(JSON.stringify({ message: err }), { status: 500 });
   }
