@@ -26,11 +26,11 @@ export default function ScenarioPreview({ scenario, onSubmit, onClose }: Scenari
           <Text color="gray">{scenario.prologue.text}</Text>
         </div>
       </div>
-      <div className="flex flex-col mt-5 sm:mt-6 gap-3 sm:flex-row-reverse">
-        <Button onClick={onSubmit}>생성하기</Button>
+      <div className="flex justify-between gap-3">
         <Button color="gray" onClick={onClose}>
           다음에
         </Button>
+        <Button onClick={onSubmit}>생성</Button>
       </div>
     </>
   );

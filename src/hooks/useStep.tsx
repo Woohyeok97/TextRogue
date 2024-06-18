@@ -13,11 +13,6 @@ export default function useStep<T extends string>(defaultStep: T) {
   };
 
   // 스텝 프로바이더
-  // const StepProvider = ({ children, name }: StepProiverProps<T>) => {
-  //   if (currentStep === name) {
-  //     return <>{children}</>;
-  //   }
-  // };
   const StepProvider = useCallback(
     ({ children, name }: StepProiverProps<T>) => {
       if (currentStep === name) {

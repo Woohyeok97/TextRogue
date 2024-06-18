@@ -26,6 +26,7 @@ export function Text({
 const alignOptions = {
   left: 'text-left',
   center: 'text-center',
+  right: 'text-right',
 };
 
 const colorOptions = {
