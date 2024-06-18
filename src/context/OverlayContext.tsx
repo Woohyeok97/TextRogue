@@ -21,7 +21,6 @@ export function OverlayContextProvider({ children }: ProviderProps) {
     render: null,
   });
 
-  console.log(overlay);
   // 오버레이 열기
   const open = useCallback((render: RenderType) => {
     setOverlay({ isOpen: true, render: render });
@@ -37,7 +36,6 @@ export function OverlayContextProvider({ children }: ProviderProps) {
     (e: MouseEvent) => {
       const target = e.target as Node;
       if (overlayRef.current && !overlayRef.current.contains(target)) {
-        console.log('out!');
         close();
       }
     },

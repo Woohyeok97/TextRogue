@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 // components
 import CreateScenario from '@/components/scenario/CreateScenario';
 import { Skeleton } from '@/components/shared/ui/Skeleton';
 import PageLayout from '@/components/shared/ui/PageLayout';
-import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: '',
