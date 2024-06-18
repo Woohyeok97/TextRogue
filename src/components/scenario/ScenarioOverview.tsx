@@ -14,7 +14,7 @@ import { ScenarioType } from '@/models';
 // reomotes
 import { createScenario } from '@/remotes/mongodb/client/scenario';
 
-export default function Overview() {
+export default function ScenarioOverview() {
   const { open } = useOverlay();
   const router = useRouter();
   const {
@@ -40,17 +40,18 @@ export default function Overview() {
   });
 
   return (
-    <div className="flex flex-col gap-10">
-      <Text align="center" size="xl">
-        시나리오 오버뷰
-      </Text>
-      <>
-        <Input {...register('title', { required: true })} label="타이틀" />
-        {errors.title && <Text color="orangered">{errors.title.message}</Text>}
-        <TextArea {...register('description', { required: true })} label="시나리오 설명" />
-        {errors.description && <Text color="orangered">{errors.description.message}</Text>}
-        <Button onClick={handlePreview}>미리보기</Button>
-      </>
+    <div className="flex flex-col justify-between">
+      <div className="mb-8">
+        <div className="mb-5">
+          <Input {...register('title', { required: true })} label="타이틀" />
+          {errors.title && <Text color="orangered">{errors.title.message}</Text>}
+        </div>
+        <div>
+          <TextArea {...register('description', { required: true })} label="소개" />
+          {errors.description && <Text color="orangered">{errors.description.message}</Text>}
+        </div>
+      </div>
+      <Button onClick={handlePreview}>미리보기</Button>
     </div>
   );
 }

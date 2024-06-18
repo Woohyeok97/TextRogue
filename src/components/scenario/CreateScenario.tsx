@@ -3,8 +3,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 // components
 import ScenarioTheme from './ScenarioTheme';
-import Prologue from './Prologue';
-import Overview from './Overview';
+import ScenarioPrologue from './ScenarioPrologue';
+import ScenarioOverview from './ScenarioOverview';
 // hooks
 import useStep from '@/hooks/useStep';
 // type & schema
@@ -13,9 +13,18 @@ import { ScenarioSchema } from '@/remotes/schema';
 
 type StepType = 'theme' | 'prologue' | 'overview';
 
-export default function CreateScenario() {
+interface CreateScenarioProps {
+  userId: string;
+}
+export default function CreateScenario({ userId }: CreateScenarioProps) {
   const { setStep, StepProvider } = useStep<StepType>('theme');
-  const methods = useForm<ScenarioType>({ resolver: zodResolver(ScenarioSchema), mode: 'onChange' });
+  const methods = useForm<ScenarioType>({
+    resolver: zodResolver(ScenarioSchema),
+    mode: 'onChange',
+    defaultValues: {
+      userId: userId,
+    },
+  });
 
   const handleNext = async (fields: (keyof ScenarioType)[], step: StepType) => {
     const isValid = await methods.trigger(fields);
@@ -24,7 +33,6 @@ export default function CreateScenario() {
     }
   };
 
-  console.log('parent render!');
   return (
     <>
       <FormProvider {...methods}>
@@ -32,10 +40,10 @@ export default function CreateScenario() {
           <ScenarioTheme onNext={() => handleNext(['genre', 'world'], 'prologue')} />
         </StepProvider>
         <StepProvider name="prologue">
-          <Prologue onNext={() => handleNext(['prologue'], 'overview')} />
+          <ScenarioPrologue onNext={() => handleNext(['prologue'], 'overview')} />
         </StepProvider>
         <StepProvider name="overview">
-          <Overview />
+          <ScenarioOverview />
         </StepProvider>
       </FormProvider>
       <button className="mt-7" onClick={() => console.log(methods.formState.errors)}>
@@ -44,6 +52,52 @@ export default function CreateScenario() {
     </>
   );
 }
+// 'use client';
+// import { FormProvider, useForm } from 'react-hook-form';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// // components
+// import ScenarioTheme from './ScenarioTheme';
+// import ScenarioPrologue from './ScenarioPrologue';
+// import Overview from './Overview';
+// // hooks
+// import useStep from '@/hooks/useStep';
+// // type & schema
+// import { ScenarioType } from '@/models';
+// import { ScenarioSchema } from '@/remotes/schema';
+
+// type StepType = 'theme' | 'prologue' | 'overview';
+
+// export default function CreateScenario() {
+//   const { setStep, StepProvider } = useStep<StepType>('theme');
+//   const methods = useForm<ScenarioType>({ resolver: zodResolver(ScenarioSchema), mode: 'onChange' });
+
+//   const handleNext = async (fields: (keyof ScenarioType)[], step: StepType) => {
+//     const isValid = await methods.trigger(fields);
+//     if (isValid) {
+//       setStep(step);
+//     }
+//   };
+
+//   console.log('parent render!');
+//   return (
+//     <>
+//       <FormProvider {...methods}>
+//         <StepProvider name="theme">
+//           <ScenarioTheme onNext={() => handleNext(['genre', 'world'], 'prologue')} />
+//         </StepProvider>
+//         <StepProvider name="prologue">
+//           <ScenarioPrologue onNext={() => handleNext(['prologue'], 'overview')} />
+//         </StepProvider>
+//         <StepProvider name="overview">
+//           <Overview />
+//         </StepProvider>
+//       </FormProvider>
+// <button className="mt-7" onClick={() => console.log(methods.formState.errors)}>
+//   Value
+// </button>
+//     </>
+//   );
+// }
 
 // 'use client';
 // import { FormProvider, useForm } from 'react-hook-form';

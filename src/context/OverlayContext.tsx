@@ -21,6 +21,7 @@ export function OverlayContextProvider({ children }: ProviderProps) {
     render: null,
   });
 
+  console.log(overlay);
   // 오버레이 열기
   const open = useCallback((render: RenderType) => {
     setOverlay({ isOpen: true, render: render });
