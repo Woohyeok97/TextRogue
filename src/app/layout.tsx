@@ -14,10 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body>
         <RootProvider>
-          <main className="max-w-6xl min-h-screen mx-auto">
+          <div className="flex flex-col min-h-screen mx-auto">
             <NavigationBar />
-            <div className="flex justify-center py-16">{children}</div>
-          </main>
+            <div className="flex-1 flex justify-center box-border py-8 sm:py-12">{children}</div>
+          </div>
         </RootProvider>
         <div id="overlay" />
       </body>

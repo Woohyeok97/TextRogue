@@ -12,16 +12,7 @@ export default function useScenarioStory({ genre, world }: { genre: string; worl
     staleTime: Infinity,
   });
 
-  // const handleRefetch = () => {
-  //   queryClient.invalidateQueries({ queryKey: ['claudePrologue', genre, world] });
-  // };
-
-  // const queryData = queryClient.getQueryData<StoryFormatType>(['claudePrologue', genre, world]);
-
-  // const handleSetQueryData = (value: StoryFormatType) => {
-  //   queryClient.setQueryData(['claudePrologue', genre, world], value);
-  // };
-
+  // useQuery 실행시, AICallCount 업데이트
   useEffect(() => {
     if (query.isFetchedAfterMount) {
       console.log('AI Call 호출');

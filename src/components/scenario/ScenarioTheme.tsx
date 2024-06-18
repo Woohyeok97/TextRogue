@@ -18,9 +18,9 @@ export default function ScenarioTheme({ onNext }: ScenarioThemeProps) {
   } = useFormContext<ScenarioType>();
 
   return (
-    <div className="flex flex-col justify-between">
-      <div className="mb-8">
-        <div className="mb-5">
+    <div className="flex-1 flex flex-col justify-between">
+      <div className="flex flex-col gap-10">
+        <div>
           <Select {...register('genre', { required: true })} defaultValue="" label="장르">
             <option value="" disabled>
               장르를 선택해주세요
@@ -31,7 +31,11 @@ export default function ScenarioTheme({ onNext }: ScenarioThemeProps) {
               </option>
             ))}
           </Select>
-          {errors.genre && <Text color="orangered">{errors.genre.message}</Text>}
+          {errors.genre && (
+            <div className="mt-4">
+              <Text color="orangered">{errors.genre.message}</Text>
+            </div>
+          )}
         </div>
         <div>
           <Select {...register('world', { required: true })} defaultValue="" label="세계관">
@@ -44,7 +48,11 @@ export default function ScenarioTheme({ onNext }: ScenarioThemeProps) {
               </option>
             ))}
           </Select>
-          {errors.world && <Text color="orangered">{errors.world.message}</Text>}
+          {errors.world && (
+            <div className="mt-4">
+              <Text color="orangered">{errors.world.message}</Text>
+            </div>
+          )}
         </div>
       </div>
 

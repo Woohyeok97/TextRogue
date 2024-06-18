@@ -11,7 +11,9 @@ export const ClaudePromptSchema = z.object({
 // 스토리 포맷 스키마
 export const StoryFormatSchema = z.object({
   text: z.string().min(100, { message: '스토리는 100자 이상 작성해야 합니다.' }),
-  choices: z.array(z.string()).length(3, { message: '3가지 선택지를 입력해야 합니다.' }),
+  choices: z
+    .array(z.string().min(1, { message: '선택지를 입력해주세요.' }))
+    .length(3, { message: '3가지 선택지를 입력해야 합니다.' }),
 });
 
 // 스토리 스키마

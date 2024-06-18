@@ -13,6 +13,7 @@ import { ScenarioType } from '@/models';
 import { ScenarioSchema } from '@/remotes/schema';
 // remotes
 import { createScenario } from '@/remotes/mongodb/client/scenario';
+import { Text } from '../shared/ui/Text';
 
 type StepType = 'theme' | 'prologue' | 'overview';
 
@@ -21,8 +22,6 @@ interface CreateScenarioProps {
 }
 export default function CreateScenario({ userId }: CreateScenarioProps) {
   const { setStep, StepProvider } = useStep<StepType>('theme');
-  const route = useRouter();
-
   const methods = useForm<ScenarioType>({
     resolver: zodResolver(ScenarioSchema),
     mode: 'onChange',
@@ -30,6 +29,7 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
       userId: userId,
     },
   });
+  const route = useRouter();
 
   // 다음 단계 핸들러
   const handleNext = async (fields: (keyof ScenarioType)[], step: StepType) => {
@@ -47,7 +47,10 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
   });
 
   return (
-    <>
+    <div className="flex flex-col h-full">
+      <div className="mb-8">
+        <Text size="max">Create Scenario</Text>
+      </div>
       <FormProvider {...methods}>
         <StepProvider name="theme">
           <ScenarioTheme onNext={() => handleNext(['genre', 'world'], 'prologue')} />
@@ -59,7 +62,7 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
           <ScenarioOverview onSubmit={handleCreate} onPrev={() => setStep('prologue')} />
         </StepProvider>
       </FormProvider>
-    </>
+    </div>
   );
 }
 // 'use client';

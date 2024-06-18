@@ -7,7 +7,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
   return (
     <div className="flex flex-col">
       {label && (
-        <label htmlFor={label} className="text-gray-500 mb-4">
+        <label htmlFor={label} className="text-gray-500 mb-2">
           {label}
         </label>
       )}
@@ -15,7 +15,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
         ref={ref}
         id={label}
         spellCheck={false}
-        className="min-h-[250px] px-5 py-3 rounded-lg text-gray-700 focus:border-blue-400 dark:bg-gray-900 dark:text-gray-300"
+        className="min-h-[200px] px-5 py-3 rounded-lg text-gray-700 focus:border-blue-400 dark:bg-gray-900 dark:text-gray-300"
         {...props}
       />
     </div>

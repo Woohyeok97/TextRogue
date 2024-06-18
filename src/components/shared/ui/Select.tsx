@@ -8,7 +8,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select({ labe
   return (
     <div className="flex flex-col">
       {label && (
-        <label htmlFor={label} className="text-gray-500 mb-4">
+        <label htmlFor={label} className="text-gray-500 mb-2">
           {label}
         </label>
       )}

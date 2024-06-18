@@ -3,7 +3,7 @@ interface PageLayoutProps {
   width?: keyof typeof widthOptions;
 }
 export default function PageLayout({ children, width = 'base' }: PageLayoutProps) {
-  return <main className={`${widthOptions[width]} px-5`}>{children}</main>;
+  return <main className={`${widthOptions[width]} px-5 w-full max-h-full`}>{children}</main>;
 }
 
 const widthOptions = {

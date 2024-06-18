@@ -43,6 +43,7 @@ const sizeOptions = {
   md: 'text-md',
   lg: 'text-lg',
   xl: 'text-xl',
+  max: 'text-2xl',
 };
 
 const weigthOptions = {
