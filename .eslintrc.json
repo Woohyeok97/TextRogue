@@ -10,7 +10,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "prettier",
-    // "eslint-config-prettier",
+    "eslint-config-prettier",
     "next/core-web-vitals"
   ],
   "rules": {

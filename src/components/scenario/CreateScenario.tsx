@@ -14,6 +14,7 @@ import { ScenarioSchema } from '@/remotes/schema';
 // remotes
 import { createScenario } from '@/remotes/mongodb/client/scenario';
 import { Text } from '../shared/ui/Text';
+import usePageOutEvent from '@/hooks/usePageOutEvent';
 
 type StepType = 'theme' | 'prologue' | 'overview';
 
@@ -30,6 +31,7 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
     },
   });
   const route = useRouter();
+  usePageOutEvent();
 
   // 다음 단계 핸들러
   const handleNext = async (fields: (keyof ScenarioType)[], step: StepType) => {
