@@ -1,14 +1,7 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
-import { checkUserAICall } from '@/remotes/mongodb/server/checkUserAICall';
 
 export async function POST(req: NextRequest) {
-  const { isValid, response } = await checkUserAICall();
-
-  if (!isValid) {
-    return response;
-  }
-
   try {
     const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_SECRET_KEY });
     const body = await req.json();
