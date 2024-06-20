@@ -24,8 +24,8 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
     formState: { errors },
   } = useFormContext<ScenarioType>();
   const { genre, world } = getValues();
-
   const queryClient = useQueryClient();
+
   const { data: claudePrologue, isFetchedAfterMount, isFetching } = useScenarioStory({ genre, world });
 
   // 1. 컴포넌트 마운트 & useQuery 실행 -> 쿼리데이터로 prologue 필드값 변경

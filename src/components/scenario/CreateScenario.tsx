@@ -1,19 +1,19 @@
 'use client';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 // components
 import ScenarioTheme from './ScenarioTheme';
 import ScenarioStory from './ScenarioStory';
 import ScenarioOverview from './ScenarioOverview';
+import { Text } from '../shared/ui/Text';
 // hooks
 import useStep from '@/hooks/useStep';
+import usePageExitEvent from '@/hooks/usePageExitEvent';
 // type & schema
 import { ScenarioType } from '@/models';
 import { ScenarioSchema } from '@/remotes/schema';
 // remotes
 import { createScenario } from '@/remotes/mongodb/client/scenario';
-import { Text } from '../shared/ui/Text';
 
 type StepType = 'theme' | 'prologue' | 'overview';
 
@@ -21,6 +21,7 @@ interface CreateScenarioProps {
   userId: string;
 }
 export default function CreateScenario({ userId }: CreateScenarioProps) {
+  const { originPush } = usePageExitEvent();
   const { setStep, StepProvider } = useStep<StepType>('theme');
   const methods = useForm<ScenarioType>({
     resolver: zodResolver(ScenarioSchema),
@@ -29,7 +30,6 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
       userId: userId,
     },
   });
-  const route = useRouter();
 
   // 다음 단계 핸들러
   const handleNext = async (fields: (keyof ScenarioType)[], step: StepType) => {
@@ -43,7 +43,7 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
   const handleCreate = methods.handleSubmit(async data => {
     const createdId = await createScenario(data);
     alert('시나리오 생성 완료');
-    route.push(`/scenario/${createdId}`);
+    originPush(`/scenario/${createdId}`);
   });
 
   return (
