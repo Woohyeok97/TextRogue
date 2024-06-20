@@ -12,11 +12,11 @@ import { ScenarioType, StoryFormatType } from '@/models';
 // hooks
 import useScenarioStory from '@/hooks/useScenarioStory';
 
-interface ScenarioPrologueProps {
+interface ScenarioStoryProps {
   onNext: () => void;
   onPrev: () => void;
 }
-export default function ScenarioPrologue({ onNext, onPrev }: ScenarioPrologueProps) {
+export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
   const {
     getValues,
     register,
