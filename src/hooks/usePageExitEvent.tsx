@@ -4,7 +4,9 @@ import { useEffect } from 'react';
 
 export default function usePageExitEvent() {
   const router = useRouter();
+  const originPush = router.push;
 
+  // beforeunload 이벤트 핸들러
   const handleBeforeUnload = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = false;
@@ -12,7 +14,6 @@ export default function usePageExitEvent() {
 
   // router.push, Link 태그 이탈 방지
   useEffect(() => {
-    const originPush = router.push;
     const newPush = (href: string, options?: NavigateOptions | undefined): void => {
       if (window.confirm('page exit?')) {
         originPush(href, options);
@@ -33,4 +34,6 @@ export default function usePageExitEvent() {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
+
+  return { originPush };
 }
