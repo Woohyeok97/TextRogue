@@ -54,7 +54,6 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
       {isFetching ? (
         <>
           <Skeleton />
-          <Skeleton />
         </>
       ) : (
         <div className="flex-1 flex flex-col justify-between gap-8">
@@ -69,8 +68,8 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
                 )}
               </div>
               <div>
-                {claudePrologue?.choices.map((item, i) => (
-                  <div className="py-3" key={item}>
+                {[...Array(3)].map((_, i) => (
+                  <div className="py-3" key={i}>
                     <Input {...register(`prologue.choices.${i}`, { required: true })} label={`선택지${i + 1}`} />
                   </div>
                 ))}

@@ -49,7 +49,9 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
   return (
     <div className="flex flex-col h-full">
       <div className="mb-8">
-        <Text size="max">Create Scenario</Text>
+        <Text size="max" onClick={() => console.log(methods.getValues())}>
+          Create Scenario
+        </Text>
       </div>
       <FormProvider {...methods}>
         <StepProvider name="theme">

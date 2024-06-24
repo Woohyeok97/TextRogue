@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 // remotes
 import { createScenarioStory } from '@/remotes/api/claude';
