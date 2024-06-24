@@ -1,23 +1,15 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
-import { checkUserAICall } from '@/remotes/mongodb/server/checkUserAICall';
 
 export async function POST(req: NextRequest) {
-  const { isValid, response } = await checkUserAICall();
+  const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_SECRET_KEY });
+  const body = await req.json();
+  const prompt = `{{genre}}=${body.genre}, {{world}}=${body.world}, {{previousStory}}=${body.previousStory}, {{userChoice}}=${body.userChoice}`;
 
-  if (!isValid) {
-    return response;
-  }
-
-  try {
-    const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_SECRET_KEY });
-    const body = await req.json();
-    const prompt = `{{genre}}=${body.genre}, {{world}}=${body.world}, {{previousStory}}=${body.previousStory}, {{userChoice}}=${body.userChoice}`;
-
-    const message = await anthropic.messages.create({
-      model: 'claude-3-haiku-20240307',
-      max_tokens: 1024,
-      system: `
+  const message = await anthropic.messages.create({
+    model: 'claude-3-haiku-20240307',
+    max_tokens: 1024,
+    system: `
       당신은 창의적인 스토리 전개와 선택지 항목을 작성하는 스토리 게임 진행자 입니다.
       다음의 입력 정보를 바탕으로 JSON 형식의 데이터를 생성해주세요:
 
@@ -55,21 +47,16 @@ export async function POST(req: NextRequest) {
       - 입력 정보({{genre}}, {{world}}, {{previousStory}}, {{userChoice}})를 충분히 반영해주세요.
       - 스토리와 선택지는 유저의 상상력을 자극할 수 있도록 작성해주세요.
       `,
-      messages: [
-        { role: 'user', content: prompt },
-        {
-          role: 'assistant',
-          content: `{
+    messages: [
+      { role: 'user', content: prompt },
+      {
+        role: 'assistant',
+        content: `{
             "text": string;
             "choices": string[];
           }`,
-        },
-      ],
-    });
-    console.log(message);
-    return Response.json(message.content[0].text);
-  } catch (err) {
-    // console.log(err);
-    return new Response(JSON.stringify({ message: err }), { status: 500 });
-  }
+      },
+    ],
+  });
+  return Response.json(message.content[0].text);
 }

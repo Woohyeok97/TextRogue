@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 // remotes
-import { continueStory } from '@/remotes/claude/claude';
 import { updateStory } from '@/remotes/mongodb/client/story';
+import { createNextStory } from '@/remotes/api/claude';
 // type
 import { StoryType } from '@/models';
 
@@ -10,12 +10,13 @@ export default function useContinueStory({ story }: { story: StoryType }) {
 
   return useMutation({
     mutationFn: async (choice: string) => {
-      const nextStory = await continueStory({
+      const prompt = {
         genre: story.genre,
         world: story.world,
         userChoice: choice,
         previousStory: story.log.map(item => item.text).join(''),
-      });
+      };
+      const nextStory = await createNextStory({ userId: story.userId, prompt });
       await updateStory({
         storyId: story._id!,
         storyLog: [...story.log, nextStory],
@@ -29,8 +30,7 @@ export default function useContinueStory({ story }: { story: StoryType }) {
       queryClient.invalidateQueries({ queryKey: ['userAICount'] });
     },
     onError: err => {
-      console.log(err);
-      // alert(`Story 진행 에러발생, 다시 시도해주세요. : ${err.message}`);
+      alert(err.message);
     },
   });
 }

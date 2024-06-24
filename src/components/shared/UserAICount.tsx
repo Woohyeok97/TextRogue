@@ -3,15 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 // components
 import { Text } from './ui/Text';
 // remotes
-import { getUserAICall } from '@/remotes/mongodb/client/userAICall';
+import { getUserAICount } from '@/remotes/mongodb/userAICount';
 
-interface AICallCountProps {
+interface UserAICountProps {
   userId: string;
 }
-export default function UserAICount({ userId }: AICallCountProps) {
+export default function UserAICount({ userId }: UserAICountProps) {
   const { data: userAICount } = useQuery({
-    queryKey: ['userAICount', userId],
-    queryFn: () => getUserAICall(userId),
+    queryKey: ['userAICount'],
+    queryFn: () => getUserAICount(userId),
   });
 
   return (
@@ -20,7 +20,7 @@ export default function UserAICount({ userId }: AICallCountProps) {
         <Image src="/펜.png" width={100} height={100} sizes="100%" alt="ai-count" className="object-cover" />
       </div>
       <Text color="gray" size="sm" weigth="bold">
-        {userAICount?.todayCount || 0} / 5
+        {userAICount?.todayCount} / 5
       </Text>
     </div>
   );

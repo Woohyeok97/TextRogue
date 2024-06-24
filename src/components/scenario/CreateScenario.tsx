@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 // components
 import ScenarioTheme from './ScenarioTheme';
-import ScenarioPrologue from './ScenarioPrologue';
+import ScenarioStory from './ScenarioStory';
 import ScenarioOverview from './ScenarioOverview';
 import { Text } from '../shared/ui/Text';
 // hooks
@@ -49,14 +49,16 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
   return (
     <div className="flex flex-col h-full">
       <div className="mb-8">
-        <Text size="max">Create Scenario</Text>
+        <Text size="max" onClick={() => console.log(methods.getValues())}>
+          Create Scenario
+        </Text>
       </div>
       <FormProvider {...methods}>
         <StepProvider name="theme">
           <ScenarioTheme onNext={() => handleNext(['genre', 'world'], 'prologue')} />
         </StepProvider>
         <StepProvider name="prologue">
-          <ScenarioPrologue onNext={() => handleNext(['prologue'], 'overview')} onPrev={() => setStep('theme')} />
+          <ScenarioStory onNext={() => handleNext(['prologue'], 'overview')} onPrev={() => setStep('theme')} />
         </StepProvider>
         <StepProvider name="overview">
           <ScenarioOverview onSubmit={handleCreate} onPrev={() => setStep('prologue')} />

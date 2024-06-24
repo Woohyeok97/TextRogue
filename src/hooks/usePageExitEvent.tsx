@@ -15,7 +15,7 @@ export default function usePageExitEvent() {
   // router.push, Link 태그 이탈 방지
   useEffect(() => {
     const newPush = (href: string, options?: NavigateOptions | undefined): void => {
-      if (window.confirm('page exit?')) {
+      if (window.confirm('페이지를 나가시겠습니까?')) {
         originPush(href, options);
       }
     };

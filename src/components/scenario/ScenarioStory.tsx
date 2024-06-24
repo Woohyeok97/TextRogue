@@ -12,11 +12,11 @@ import { ScenarioType, StoryFormatType } from '@/models';
 // hooks
 import useScenarioStory from '@/hooks/useScenarioStory';
 
-interface ScenarioPrologueProps {
+interface ScenarioStoryProps {
   onNext: () => void;
   onPrev: () => void;
 }
-export default function ScenarioPrologue({ onNext, onPrev }: ScenarioPrologueProps) {
+export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
   const {
     getValues,
     register,
@@ -24,8 +24,8 @@ export default function ScenarioPrologue({ onNext, onPrev }: ScenarioProloguePro
     formState: { errors },
   } = useFormContext<ScenarioType>();
   const { genre, world } = getValues();
-
   const queryClient = useQueryClient();
+
   const { data: claudePrologue, isFetchedAfterMount, isFetching } = useScenarioStory({ genre, world });
 
   // 1. 컴포넌트 마운트 & useQuery 실행 -> 쿼리데이터로 prologue 필드값 변경
@@ -54,7 +54,6 @@ export default function ScenarioPrologue({ onNext, onPrev }: ScenarioProloguePro
       {isFetching ? (
         <>
           <Skeleton />
-          <Skeleton />
         </>
       ) : (
         <div className="flex-1 flex flex-col justify-between gap-8">
@@ -69,8 +68,8 @@ export default function ScenarioPrologue({ onNext, onPrev }: ScenarioProloguePro
                 )}
               </div>
               <div>
-                {claudePrologue?.choices.map((item, i) => (
-                  <div className="py-3" key={item}>
+                {[...Array(3)].map((_, i) => (
+                  <div className="py-3" key={i}>
                     <Input {...register(`prologue.choices.${i}`, { required: true })} label={`선택지${i + 1}`} />
                   </div>
                 ))}
