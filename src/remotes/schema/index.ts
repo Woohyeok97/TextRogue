@@ -46,8 +46,8 @@ export const BookmarkSchema = z.object({
   userId: z.string().min(1),
 });
 
-// 유저 AI Call 스키마 (클로드)
-export const UserAICallSchema = z.object({
+// 유저 AI Count 스키마
+export const UserAICountSchema = z.object({
   userId: z.string(),
   todayCount: z.number().min(0).max(10),
   lastCallDate: z.string(),

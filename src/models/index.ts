@@ -5,7 +5,7 @@ import {
   ClaudePromptSchema,
   StorySchema,
   BookmarkSchema,
-  UserAICallSchema,
+  UserAICountSchema,
 } from '@/remotes/schema';
 
 // 클로드 프롬프트 타입
@@ -24,4 +24,4 @@ export type StoryType = z.infer<typeof StorySchema>;
 export type BookmarkType = z.infer<typeof BookmarkSchema>;
 
 // 유저 AI Call 타입
-export type UserAICallType = z.infer<typeof UserAICallSchema>;
+export type UserAICountType = z.infer<typeof UserAICountSchema>;

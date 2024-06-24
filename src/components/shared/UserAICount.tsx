@@ -10,9 +10,8 @@ interface UserAICountProps {
 }
 export default function UserAICount({ userId }: UserAICountProps) {
   const { data: userAICount } = useQuery({
-    queryKey: ['userAICount', userId],
+    queryKey: ['userAICount'],
     queryFn: () => getUserAICount(userId),
-    staleTime: Infinity,
   });
 
   return (

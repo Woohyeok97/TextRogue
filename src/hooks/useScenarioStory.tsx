@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 // remotes
 import { createScenarioStory } from '@/remotes/api/claude';
@@ -7,6 +7,7 @@ import { createScenarioStory } from '@/remotes/api/claude';
 import { StoryFormatType } from '@/models';
 
 export default function useScenarioStory({ genre, world }: { genre: string; world: string }) {
+  const queryClient = useQueryClient();
   const session = useSession();
 
   const query = useQuery<StoryFormatType>({
@@ -22,6 +23,12 @@ export default function useScenarioStory({ genre, world }: { genre: string; worl
       alert(query.error.message);
     }
   }, [query.isError]);
+
+  useEffect(() => {
+    if (query.isFetchedAfterMount) {
+      queryClient.invalidateQueries({ queryKey: ['userAICount'] });
+    }
+  }, [query.isFetchedAfterMount, query.data]);
 
   return query;
 }
