@@ -31,7 +31,6 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
   // 1. 컴포넌트 마운트 & useQuery 실행 -> 쿼리데이터로 prologue 필드값 변경
   useEffect(() => {
     if (isFetchedAfterMount && claudePrologue) {
-      console.log('action');
       setValue('prologue', claudePrologue);
     }
   }, [claudePrologue, isFetchedAfterMount, setValue]);
