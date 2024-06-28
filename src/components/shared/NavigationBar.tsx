@@ -43,8 +43,9 @@ export default function NavigationBar() {
     <nav className="relative bg-gray-800" ref={navigationRef}>
       <div className="flex flex-col justify-between px-6 py-4 md:max-w-[80%] mx-auto">
         <div className="flex items-center justify-between w-full">
-          <Link href="/" onClick={handleMenuClick}>
+          <Link href="/" onClick={handleMenuClick} className="flex items-center gap-2">
             <Image className="w-auto h-6 sm:h-7" src="/로고.png" alt="Logo" width={100} height={24} />
+            <Text weigth="bold">TextRogue</Text>
           </Link>
           <div className="flex items-center gap-5">
             {session?.user.id && <UserAICount userId={session.user.id} />}

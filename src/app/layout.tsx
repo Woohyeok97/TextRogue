@@ -5,8 +5,8 @@ import RootProvider from '../components/shared/RootProvider';
 import NavigationBar from '@/components/shared/NavigationBar';
 
 export const metadata: Metadata = {
-  title: 'prototype',
-  description: 'ai text prototype',
+  title: 'TextRogue',
+  description: 'AI TextRogue',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
