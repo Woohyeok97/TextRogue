@@ -53,7 +53,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts
-          path: ./
+          path: |
+            public
+            src
+            .env
+            next.config.js
+            package.json
+            yarn.lock
+            !.git/
 
   deploy:
     needs: build
