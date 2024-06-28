@@ -3757,38 +3757,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prototype@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "prototype@workspace:."
-  dependencies:
-    "@anthropic-ai/sdk": "npm:^0.20.8"
-    "@hookform/resolvers": "npm:^3.3.4"
-    "@tanstack/react-query": "npm:^5.34.2"
-    "@tanstack/react-query-devtools": "npm:^5.40.1"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^18"
-    "@types/react-dom": "npm:^18"
-    "@typescript-eslint/eslint-plugin": "npm:^7.8.0"
-    "@typescript-eslint/parser": "npm:^7.8.0"
-    axios: "npm:^1.6.8"
-    eslint: "npm:^8"
-    eslint-config-next: "npm:14.2.3"
-    eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-prettier: "npm:^5.1.3"
-    mongodb: "npm:^6.6.0"
-    next: "npm:14.2.3"
-    next-auth: "npm:^4.24.7"
-    postcss: "npm:^8"
-    prettier: "npm:^3.2.5"
-    react: "npm:^18"
-    react-dom: "npm:^18"
-    react-hook-form: "npm:^7.51.4"
-    tailwindcss: "npm:^3.4.1"
-    typescript: "npm:^5"
-    zod: "npm:^3.23.6"
-  languageName: unknown
-  linkType: soft
-
 "proxy-from-env@npm:^1.1.0":
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
@@ -4421,6 +4389,38 @@ __metadata:
   checksum: 10c0/02805740c12851ea5982686810702e2f14369a5f4c5c40a836821e3eefc65ffeec3131ba324692a37608294b0fd8c1e55a2dd571ffed4909822787668ddbee5c
   languageName: node
   linkType: hard
+
+"textrogue@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "textrogue@workspace:."
+  dependencies:
+    "@anthropic-ai/sdk": "npm:^0.20.8"
+    "@hookform/resolvers": "npm:^3.3.4"
+    "@tanstack/react-query": "npm:^5.34.2"
+    "@tanstack/react-query-devtools": "npm:^5.40.1"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^18"
+    "@types/react-dom": "npm:^18"
+    "@typescript-eslint/eslint-plugin": "npm:^7.8.0"
+    "@typescript-eslint/parser": "npm:^7.8.0"
+    axios: "npm:^1.6.8"
+    eslint: "npm:^8"
+    eslint-config-next: "npm:14.2.3"
+    eslint-config-prettier: "npm:^9.1.0"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    mongodb: "npm:^6.6.0"
+    next: "npm:14.2.3"
+    next-auth: "npm:^4.24.7"
+    postcss: "npm:^8"
+    prettier: "npm:^3.2.5"
+    react: "npm:^18"
+    react-dom: "npm:^18"
+    react-hook-form: "npm:^7.51.4"
+    tailwindcss: "npm:^3.4.1"
+    typescript: "npm:^5"
+    zod: "npm:^3.23.6"
+  languageName: unknown
+  linkType: soft
 
 "thenify-all@npm:^1.0.0":
   version: 1.6.0

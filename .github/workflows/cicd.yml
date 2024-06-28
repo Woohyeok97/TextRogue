@@ -1,4 +1,4 @@
-name: CI
+name: CICD
 
 # main branch에 push 되면 실행
 on:
@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest # action이 구동될 OS 환경을 세팅
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Setup Node # action이 구동될 Node 버전을 세팅함
@@ -49,4 +49,35 @@ jobs:
       - name: Build project
         run: yarn build
       
-      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: ./
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest # action이 구동될 OS 환경을 세팅
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+    
+    - name: make zip file
+      run: zip -r app.zip . -x "node_modules/*"
+    
+    - name: Deploy EB
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+        application_name: TextRogue
+        environment_name: TextRogue
+        version_label: ${{ github.run_number }}
+        region: ap-northeast-2
+        deployment_package: app.zip
