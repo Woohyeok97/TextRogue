@@ -38,7 +38,6 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.8.0"],\
           ["@typescript-eslint/parser", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.8.0"],\
           ["axios", "npm:1.6.8"],\
-          ["cross-env", "npm:7.0.3"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:14.2.3"],\
           ["eslint-config-prettier", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:9.1.0"],\
@@ -1641,16 +1640,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/cookie-npm-0.5.0-e2d58a161a-10c0.zip/node_modules/cookie/",\
         "packageDependencies": [\
           ["cookie", "npm:0.5.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["cross-env", [\
-      ["npm:7.0.3", {\
-        "packageLocation": "../../../.yarn/berry/cache/cross-env-npm-7.0.3-96d81820f4-10c0.zip/node_modules/cross-env/",\
-        "packageDependencies": [\
-          ["cross-env", "npm:7.0.3"],\
-          ["cross-spawn", "npm:7.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5550,7 +5539,6 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.8.0"],\
           ["@typescript-eslint/parser", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.8.0"],\
           ["axios", "npm:1.6.8"],\
-          ["cross-env", "npm:7.0.3"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:14.2.3"],\
           ["eslint-config-prettier", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:9.1.0"],\
