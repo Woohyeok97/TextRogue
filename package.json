@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 8080",
+    "start": "next start",
     "lint": "next lint",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write ."
@@ -24,6 +24,7 @@
     "zod": "^3.23.6"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.4",
     "@tanstack/react-query-devtools": "^5.40.1",
     "@types/node": "^20",
     "@types/react": "^18",
