@@ -14,6 +14,7 @@ const nextConfig = {
 // export default nextConfig;
 module.exports = withBundleAnalyzer(nextConfig);
 
+// optimizePackageImports 패키지
 module.exports = {
   experimental: {
     optimizePackageImports: [
