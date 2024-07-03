@@ -35,17 +35,8 @@ jobs:
       - name: Build project
         run: yarn build
       
-      - name: Remove Dir
-        run: rm -rf .yarn .github .vscode .git yarn.lock 
-      
-      - name: Make node_modules Dir
-        run: mkdir node_modules
-      
-      - name: NPM Install
-        run: npm install --omit=dev
-      
       - name: make zip file # node modules 제외한 압축 파일을 만들어준다.
-        run: zip ./app.zip -r * .[^.]*
+        run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
 
       - name: Deploy to EB # Elastic Beanstalk으로 배포를 진행한다.
         uses: einaregilsson/beanstalk-deploy@v21
