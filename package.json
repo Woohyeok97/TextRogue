@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "install": "npm install --production --no-optional --no-audit --no-fund",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write ."
   },
