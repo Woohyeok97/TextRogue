@@ -29,23 +29,25 @@ jobs:
           echo "NEXT_PUBLIC_STORY=/api/mongodb/story" >> .env
           echo "NEXT_PUBLIC_BOOKMARK=/api/mongodb/bookmark" >> .env
     
-      - name: Install dependencies
-        run: yarn install
+      - name: Yarn install
+        run: |
+          yarn set version 4.3.1
+          yarn install
 
       - name: Build project
         run: yarn build
       
       - name: make zip file # node modules 제외한 압축 파일을 만들어준다.
-        run: zip -r app.zip * -x "node_modules/*"
+        run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
 
       - name: Deploy to EB # Elastic Beanstalk으로 배포를 진행한다.
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: TextRogue
-          environment_name: TextRogue
-          version_label: ${{ github.sha }}
+          application_name: textrogue
+          environment_name: textrogue
+          version_label: ${{ github.run_number }}
           region: ap-northeast-2
           deployment_package: app.zip 
           use_existing_version_if_available: true
