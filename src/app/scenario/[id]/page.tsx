@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import backImg from '@/../public/기본배경.jpeg';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
@@ -31,14 +32,7 @@ export default async function ScenarioPage({ params }: ScenarioPageProps) {
   return (
     <PageLayout width="xl">
       <div className="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <Image
-          width={100}
-          height={100}
-          sizes="100%"
-          className="object-cover w-full h-64"
-          src="/기본배경.jpeg"
-          alt="Article"
-        />
+        <Image width={100} height={100} sizes="100%" className="object-cover w-full h-64" src={backImg} alt="Article" />
         <div className="p-6">
           <p className="font-bold mb-3 text-gray-700 cursor-pointer dark:text-gray-200">고나우</p>
           <div className="flex justify-between">

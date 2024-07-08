@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import masterImg from '@/../public/올라프.webp';
 // components
 import { Spacing } from '../shared/ui/Spacing';
 // type
@@ -16,7 +17,7 @@ export default function StoryFormat({ story, onClick }: StoryFormatProps) {
           width={100}
           height={100}
           sizes="100%"
-          src="/올라프.webp"
+          src={masterImg}
           className="object-cover w-full h-full"
           alt="avatar"
         />

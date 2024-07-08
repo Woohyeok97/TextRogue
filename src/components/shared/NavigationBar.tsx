@@ -1,5 +1,7 @@
 'use client';
 import Image from 'next/image';
+import logoImg from '@/../public/로고.png';
+import defaultUserImg from '@/../public/방문자_아바타.jpeg';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -44,7 +46,7 @@ export default function NavigationBar() {
       <div className="flex flex-col justify-between px-6 py-4 md:max-w-[80%] mx-auto">
         <div className="flex items-center justify-between w-full">
           <Link href="/" onClick={handleMenuClick} className="flex items-center gap-2">
-            <Image className="w-auto h-6 sm:h-7" src="/로고.png" alt="Logo" width={100} height={24} />
+            <Image className="w-auto h-6 sm:h-7" src={logoImg} alt="Logo" width={100} height={24} />
             <Text weigth="bold">TextRogue</Text>
           </Link>
           <div className="flex items-center gap-5">
@@ -57,7 +59,7 @@ export default function NavigationBar() {
                     width={100}
                     height={100}
                     sizes="100%"
-                    src={session ? `${session.user?.image}` : '/방문자_아바타.jpeg'}
+                    src={session ? `${session.user?.image}` : `${defaultUserImg}`}
                     className="object-cover w-full h-full"
                     alt="avatar"
                   />
