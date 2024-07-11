@@ -54,7 +54,7 @@ export default function NavigationBar() {
             <button onClick={handleToggleClick} className="flex items-center gap-3">
               <Text className="hidden sm:block">{session?.user?.name}</Text>
               <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                {status !== 'loading' && (
+                {/* {status !== 'loading' && (
                   <Image
                     width={100}
                     height={100}
@@ -63,7 +63,7 @@ export default function NavigationBar() {
                     className="object-cover w-full h-full"
                     alt="avatar"
                   />
-                )}
+                )} */}
               </div>
             </button>
           </div>

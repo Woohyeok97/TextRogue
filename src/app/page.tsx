@@ -9,6 +9,7 @@ import { Spacing } from '@/components/shared/ui/Spacing';
 // remotes
 import { getScenarioList } from '@/remotes/mongodb/server/scenario';
 import { getUserStoryList } from '@/remotes/mongodb/server/story';
+import OverlayTest from './OverlayTest';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -17,6 +18,7 @@ export default async function Home() {
 
   return (
     <PageLayout>
+      <OverlayTest />
       {userStoryList && userStoryList.length !== 0 && (
         <div className="flex flex-col justify-between gap-5">
           <Text size="xl">이어서 하기</Text>

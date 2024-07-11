@@ -49,6 +49,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:18.3.1"],\
           ["react-hook-form", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.51.4"],\
+          ["recoil", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:0.7.7"],\
           ["tailwindcss", "npm:3.4.3"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["zod", "npm:3.23.6"]\
@@ -2914,6 +2915,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["hamt_plus", [\
+      ["npm:1.0.2", {\
+        "packageLocation": "./.yarn/cache/hamt_plus-npm-1.0.2-67a52ee1df-c5aa5cc082.zip/node_modules/hamt_plus/",\
+        "packageDependencies": [\
+          ["hamt_plus", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["has-bigints", [\
       ["npm:1.0.2", {\
         "packageLocation": "./.yarn/cache/has-bigints-npm-1.0.2-52732e614d-724eb1485b.zip/node_modules/has-bigints/",\
@@ -4803,6 +4813,37 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["recoil", [\
+      ["npm:0.7.7", {\
+        "packageLocation": "./.yarn/cache/recoil-npm-0.7.7-4452f58b67-630a73b0bd.zip/node_modules/recoil/",\
+        "packageDependencies": [\
+          ["recoil", "npm:0.7.7"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:0.7.7", {\
+        "packageLocation": "./.yarn/__virtual__/recoil-virtual-a9515a2457/0/cache/recoil-npm-0.7.7-4452f58b67-630a73b0bd.zip/node_modules/recoil/",\
+        "packageDependencies": [\
+          ["recoil", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:0.7.7"],\
+          ["@types/react", "npm:18.3.1"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["@types/react-native", null],\
+          ["hamt_plus", "npm:1.0.2"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:18.3.1"],\
+          ["react-native", null]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react-native",\
+          "@types/react",\
+          "react-dom",\
+          "react-native",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["reflect.getprototypeof", [\
       ["npm:1.0.6", {\
         "packageLocation": "./.yarn/cache/reflect.getprototypeof-npm-1.0.6-b33819c756-baf4ef8ee6.zip/node_modules/reflect.getprototypeof/",\
@@ -5421,6 +5462,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:18.3.1"],\
           ["react-hook-form", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.51.4"],\
+          ["recoil", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:0.7.7"],\
           ["tailwindcss", "npm:3.4.3"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["zod", "npm:3.23.6"]\
