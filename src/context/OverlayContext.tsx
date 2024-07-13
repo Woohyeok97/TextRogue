@@ -36,6 +36,7 @@ export function OverlayContextProvider({ children }: ProviderProps) {
     (e: MouseEvent) => {
       const target = e.target as Node;
       if (overlayRef.current && !overlayRef.current.contains(target)) {
+        console.log('out!');
         close();
       }
     },
