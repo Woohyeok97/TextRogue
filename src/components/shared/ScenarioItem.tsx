@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import defaultUserImg from '@/../public/방문자_아바타.jpeg';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
@@ -62,7 +61,7 @@ export default async function ScenarioItem({ scenario }: ScenarioItemProps) {
               width={100}
               height={100}
               sizes="100%"
-              src={defaultUserImg}
+              src="/images/방문자.png"
               className="object-cover w-full h-full"
               alt="avatar"
             />

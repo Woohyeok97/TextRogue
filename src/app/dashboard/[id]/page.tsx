@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import defaultUserImg from '@/../public/방문자_아바타.jpeg';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import { redirect } from 'next/navigation';
@@ -27,7 +26,7 @@ export default async function DashBoardPage() {
             width={100}
             height={100}
             sizes="100%"
-            src={session ? `${session.user?.image}` : `${defaultUserImg}`}
+            src={session ? `${session.user?.image}` : `/images/방문자.png`}
             className="object-cover w-full h-full"
             alt="avatar"
           />
