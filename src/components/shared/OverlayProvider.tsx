@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 import { overlayState } from '@/recoil/atom';
 import { useCallback, useEffect, useRef } from 'react';
-import useOverlay from '@/hooks/useOver';
+import useOverlay from '@/hooks/useOverlay';
 
 interface OverlayProviderProps {
   children: React.ReactNode;
@@ -37,7 +37,12 @@ export default function OverlayProvider({ children }: OverlayProviderProps) {
     <>
       {children}
       {overlay.isOpen &&
-        createPortal(<div ref={overlayRef}>{overlay.content}</div>, document.getElementById('overlay') as HTMLElement)}
+        createPortal(
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+            <div ref={overlayRef}>{overlay.content}</div>
+          </div>,
+          document.getElementById('overlay') as HTMLElement
+        )}
     </>
   );
 }

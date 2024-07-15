@@ -1,6 +1,6 @@
 'use client';
 import BottomSheet from '@/components/shared/ui/Bottomsheet';
-import useOverlay from '@/hooks/useOver';
+import useOverlay from '@/hooks/useOverlay';
 import Content from './Content';
 import { useState } from 'react';
 import { Button } from '@/components/shared/ui/Button';
