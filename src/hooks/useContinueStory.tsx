@@ -1,4 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Dialog from '@/components/shared/ui/Dialog';
+// hooks
+import useOverlay from './useOverlay';
 // remotes
 import { updateStory } from '@/remotes/mongodb/client/story';
 import { createNextStory } from '@/remotes/api/claude';
@@ -7,6 +10,7 @@ import { StoryType } from '@/models';
 
 export default function useContinueStory({ story }: { story: StoryType }) {
   const queryClient = useQueryClient();
+  const { open, close } = useOverlay();
 
   return useMutation({
     mutationFn: async (choice: string) => {
@@ -30,7 +34,8 @@ export default function useContinueStory({ story }: { story: StoryType }) {
       queryClient.invalidateQueries({ queryKey: ['userAICount'] });
     },
     onError: err => {
-      alert(err.message);
+      open(<Dialog onClose={close}>{err.message}</Dialog>);
+      // alert(err.message);
     },
   });
 }
