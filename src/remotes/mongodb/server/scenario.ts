@@ -42,7 +42,7 @@ export const getUserBookmarkList = async (userId: string): Promise<ScenarioType[
   const db = (await connectDB).db('prototype');
   const bookmarks = await db.collection('bookmark').find({ userId: userId }).toArray();
   const scenarioId = bookmarks.map(
-    item => new ObjectId(BookmarkSchema.parse({ ...item, _id: item._id.toString() }).scenarioId)
+    item => new ObjectId(BookmarkSchema.parse({ ...item, _id: item._id.toString() }).scenarioId),
   );
   const result = await db
     .collection('scenario')

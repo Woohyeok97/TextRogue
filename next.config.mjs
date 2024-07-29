@@ -1,18 +1,14 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMode : true,
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
-      {
-        protocol: 'http',
-        hostname: 'textrogue.ap-northeast-2.elasticbeanstalk.com',
-      }
-    ]
+    ],
   },
 };
 

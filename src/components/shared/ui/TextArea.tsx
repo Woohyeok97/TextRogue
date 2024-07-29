@@ -3,7 +3,10 @@ import { forwardRef } from 'react';
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
 }
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextArea({ label, ...props }, ref) {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextArea(
+  { label, ...props },
+  ref,
+) {
   return (
     <div className="flex flex-col">
       {label && (

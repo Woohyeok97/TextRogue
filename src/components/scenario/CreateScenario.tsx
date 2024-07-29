@@ -58,7 +58,10 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
           <ScenarioTheme onNext={() => handleNext(['genre', 'world'], 'prologue')} />
         </StepProvider>
         <StepProvider name="prologue">
-          <ScenarioStory onNext={() => handleNext(['prologue'], 'overview')} onPrev={() => setStep('theme')} />
+          <ScenarioStory
+            onNext={() => handleNext(['prologue'], 'overview')}
+            onPrev={() => setStep('theme')}
+          />
         </StepProvider>
         <StepProvider name="overview">
           <ScenarioOverview onSubmit={handleCreate} onPrev={() => setStep('prologue')} />

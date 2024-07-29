@@ -1,8 +1,8 @@
 'use client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { OverlayContextProvider } from '@/context/OverlayContext';
 import { SessionProvider } from 'next-auth/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { RecoilRoot } from 'recoil';
 
 function makeQueryClient() {
   return new QueryClient({
@@ -36,7 +36,7 @@ export default function RootProvider({ children }: RootProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
-        <OverlayContextProvider>{children}</OverlayContextProvider>
+        <RecoilRoot>{children}</RecoilRoot>
       </SessionProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

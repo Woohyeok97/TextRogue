@@ -16,7 +16,7 @@ interface ScenarioOverviewProps {
   onPrev: () => void;
 }
 export default function ScenarioOverview({ onSubmit, onPrev }: ScenarioOverviewProps) {
-  const { open } = useOverlay();
+  const { open, close } = useOverlay();
   const {
     register,
     handleSubmit,
@@ -25,11 +25,11 @@ export default function ScenarioOverview({ onSubmit, onPrev }: ScenarioOverviewP
 
   // 미리보기 핸들러
   const handlePreview = handleSubmit(scenario => {
-    open(close => (
+    open(
       <BottomSheet>
         <ScenarioPreview scenario={scenario} onClose={close} onSubmit={onSubmit} />
-      </BottomSheet>
-    ));
+      </BottomSheet>,
+    );
   });
 
   return (

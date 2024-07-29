@@ -1,7 +1,5 @@
 'use client';
 import Image from 'next/image';
-import logoImg from '@/../public/로고.png';
-import defaultUserImg from '@/../public/방문자_아바타.jpeg';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -46,7 +44,13 @@ export default function NavigationBar() {
       <div className="flex flex-col justify-between px-6 py-4 md:max-w-[80%] mx-auto">
         <div className="flex items-center justify-between w-full">
           <Link href="/" onClick={handleMenuClick} className="flex items-center gap-2">
-            <Image className="w-auto h-6 sm:h-7" src={logoImg} alt="Logo" width={100} height={24} />
+            <Image
+              className="w-auto h-6 sm:h-7"
+              src="/images/로고.png"
+              alt="Logo"
+              width={100}
+              height={24}
+            />
             <Text weigth="bold">TextRogue</Text>
           </Link>
           <div className="flex items-center gap-5">
@@ -59,7 +63,7 @@ export default function NavigationBar() {
                     width={100}
                     height={100}
                     sizes="100%"
-                    src={session ? `${session.user?.image}` : `${defaultUserImg}`}
+                    src={session ? `${session.user?.image}` : `/images/방문자.png`}
                     className="object-cover w-full h-full"
                     alt="avatar"
                   />
@@ -74,7 +78,9 @@ export default function NavigationBar() {
               isOpen ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'
             } overflow-hidden`}
           >
-            <div className={`flex flex-col justify-between mt-7 sm:flex-row sm:items-center sm:space-x-4`}>
+            <div
+              className={`flex flex-col justify-between mt-7 sm:flex-row sm:items-center sm:space-x-4`}
+            >
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href={`/dashboard/${session.user.id}`} onClick={handleMenuClick}>
                   <Text>대시보드</Text>
