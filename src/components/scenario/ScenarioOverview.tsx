@@ -28,7 +28,7 @@ export default function ScenarioOverview({ onSubmit, onPrev }: ScenarioOverviewP
     open(
       <BottomSheet>
         <ScenarioPreview scenario={scenario} onClose={close} onSubmit={onSubmit} />
-      </BottomSheet>
+      </BottomSheet>,
     );
   });
 

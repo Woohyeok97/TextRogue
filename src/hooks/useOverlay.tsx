@@ -24,7 +24,7 @@ export default function useOverlay() {
     return () => {
       close();
     };
-  }, []);
+  }, [close]);
 
   return { open, close };
 }

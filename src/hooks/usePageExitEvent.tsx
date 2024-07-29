@@ -24,7 +24,7 @@ export default function usePageExitEvent() {
     return () => {
       router.push = originPush;
     };
-  }, []);
+  }, [originPush, router]);
 
   // beforeunload 이벤트 부착
   useEffect(() => {

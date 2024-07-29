@@ -19,7 +19,7 @@ export default function useStep<T extends string>(defaultStep: T) {
         return <>{children}</>;
       }
     },
-    [currentStep]
+    [currentStep],
   );
 
   return { currentStep, setStep, StepProvider };

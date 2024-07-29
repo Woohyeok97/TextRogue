@@ -26,7 +26,11 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
   const { genre, world } = getValues();
   const queryClient = useQueryClient();
 
-  const { data: claudePrologue, isFetchedAfterMount, isFetching } = useScenarioStory({ genre, world });
+  const {
+    data: claudePrologue,
+    isFetchedAfterMount,
+    isFetching,
+  } = useScenarioStory({ genre, world });
 
   // 1. 컴포넌트 마운트 & useQuery 실행 -> 쿼리데이터로 prologue 필드값 변경
   useEffect(() => {
@@ -70,7 +74,10 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
               <div>
                 {[...Array(3)].map((_, i) => (
                   <div className="py-3" key={i}>
-                    <Input {...register(`prologue.choices.${i}`, { required: true })} label={`선택지${i + 1}`} />
+                    <Input
+                      {...register(`prologue.choices.${i}`, { required: true })}
+                      label={`선택지${i + 1}`}
+                    />
                   </div>
                 ))}
                 {errors.prologue?.choices && (
@@ -85,7 +92,9 @@ export default function ScenarioStory({ onNext, onPrev }: ScenarioStoryProps) {
                     color="gray"
                     align="right"
                     size="sm"
-                    onClick={() => queryClient.invalidateQueries({ queryKey: ['claudePrologue', genre, world] })}
+                    onClick={() =>
+                      queryClient.invalidateQueries({ queryKey: ['claudePrologue', genre, world] })
+                    }
                   >
                     Refetching?
                   </Text>

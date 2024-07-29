@@ -51,7 +51,9 @@ export default async function ScenarioItem({ scenario }: ScenarioItemProps) {
             {scenario.title}
           </Text>
         </Link>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 line-clamp-3">{scenario.prologue.text}</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300 line-clamp-3">
+          {scenario.prologue.text}
+        </p>
       </div>
 
       <div className="flex justify-between items-center mt-4">

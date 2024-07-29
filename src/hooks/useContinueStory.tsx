@@ -29,7 +29,10 @@ export default function useContinueStory({ story }: { story: StoryType }) {
     },
     onSuccess: nextStory => {
       // story 데이터 업데이트 (캐시 데이터 변경)
-      queryClient.setQueryData(['story', story._id], (prev: StoryType) => ({ ...prev, log: [...prev.log, nextStory] }));
+      queryClient.setQueryData(['story', story._id], (prev: StoryType) => ({
+        ...prev,
+        log: [...prev.log, nextStory],
+      }));
       // 유저 AI 카운트 업데이트 (쿼리키 초기화)
       queryClient.invalidateQueries({ queryKey: ['userAICount'] });
     },

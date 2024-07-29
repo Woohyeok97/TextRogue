@@ -15,12 +15,15 @@ export default function OverlayProvider({ children }: OverlayProviderProps) {
   console.log('provder!');
 
   // 오버레이 바깥영역 클릭 -> 오버레이 닫기
-  const handleOutClick = useCallback((e: MouseEvent) => {
-    const target = e.target as Node;
-    if (overlayRef.current && !overlayRef.current.contains(target)) {
-      close();
-    }
-  }, []);
+  const handleOutClick = useCallback(
+    (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (overlayRef.current && !overlayRef.current.contains(target)) {
+        close();
+      }
+    },
+    [close],
+  );
   // handleOutClick 메모이징 -> 메모이징을 안하면 handleOutClick 함수가 '먼저' 정의 되어서 ref 감지를 못함 -> opne 버튼 클릭
 
   useEffect(() => {
@@ -41,7 +44,7 @@ export default function OverlayProvider({ children }: OverlayProviderProps) {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
             <div ref={overlayRef}>{overlay.content}</div>
           </div>,
-          document.getElementById('overlay') as HTMLElement
+          document.getElementById('overlay') as HTMLElement,
         )}
     </>
   );

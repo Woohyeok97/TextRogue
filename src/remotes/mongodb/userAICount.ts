@@ -20,7 +20,7 @@ export const getUserAICount = async (userId: string): Promise<UserAICountType> =
           lastCallDate: currentDate,
         },
       },
-      { returnDocument: 'after', upsert: true }
+      { returnDocument: 'after', upsert: true },
     );
 
     const userAICount = UserAICountSchema.parse(result);
@@ -29,7 +29,11 @@ export const getUserAICount = async (userId: string): Promise<UserAICountType> =
     if (userAICount.lastCallDate !== currentDate) {
       const resetUserAICount = await db
         .collection('userAICount')
-        .findOneAndUpdate({ userId: userId }, { $set: { todayCount: 0 } }, { returnDocument: 'after' });
+        .findOneAndUpdate(
+          { userId: userId },
+          { $set: { todayCount: 0 } },
+          { returnDocument: 'after' },
+        );
       return UserAICountSchema.parse(resetUserAICount);
     }
 
@@ -47,7 +51,10 @@ export const updateUserAICount = async (userId: string) => {
     const db = (await connectDB).db('prototype');
     await db
       .collection('userAICount')
-      .updateOne({ userId: userId }, { $inc: { todayCount: 1 }, $set: { lastCallDate: currentDate } });
+      .updateOne(
+        { userId: userId },
+        { $inc: { todayCount: 1 }, $set: { lastCallDate: currentDate } },
+      );
   } catch (err) {
     throw new Error('유저 AI 업데이트 오류가 발생했습니다.');
   }

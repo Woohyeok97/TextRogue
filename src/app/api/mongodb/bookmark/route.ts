@@ -7,7 +7,9 @@ export async function GET(req: NextRequest) {
   const scenarioId = searchParams.get('scenarioId');
 
   const db = (await connectDB).db('prototype');
-  const result = await db.collection('bookmark').findOne({ scenarioId: scenarioId, userId: userId });
+  const result = await db
+    .collection('bookmark')
+    .findOne({ scenarioId: scenarioId, userId: userId });
   return Response.json(result);
 }
 

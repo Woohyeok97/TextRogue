@@ -26,13 +26,13 @@ export default function useScenarioStory({ genre, world }: { genre: string; worl
     if (query.isError) {
       open(<Dialog onClose={close}>{query.error.message}</Dialog>);
     }
-  }, [query.isError]);
+  }, [close, open, query.error, query.isError]);
 
   useEffect(() => {
     if (query.isFetchedAfterMount) {
       queryClient.invalidateQueries({ queryKey: ['userAICount'] });
     }
-  }, [query.isFetchedAfterMount, query.data]);
+  }, [query.isFetchedAfterMount, queryClient]);
 
   return query;
 }

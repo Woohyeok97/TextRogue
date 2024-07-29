@@ -4,7 +4,13 @@ import { BookmarkType } from '@/models';
 // remotes
 import { createBookmark, removeBookmark } from '@/remotes/mongodb/client/bookmark';
 
-export default function useBookmark({ scenarioId, userId }: { scenarioId: string; userId: string }) {
+export default function useBookmark({
+  scenarioId,
+  userId,
+}: {
+  scenarioId: string;
+  userId: string;
+}) {
   const queryClient = useQueryClient();
 
   // 북마크 데이터

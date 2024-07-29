@@ -17,7 +17,10 @@ export default function Bookmark({ scenarioId, userId }: BookmarkProps) {
   };
 
   return (
-    <Button color={bookmark ? (isPending ? 'gray' : 'blue') : isPending ? 'blue' : 'gray'} onClick={handleClick}>
+    <Button
+      color={bookmark ? (isPending ? 'gray' : 'blue') : isPending ? 'blue' : 'gray'}
+      onClick={handleClick}
+    >
       Bookmark
     </Button>
   );
