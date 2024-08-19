@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 // hooks
 import useOverlay from './useOverlay';
@@ -8,6 +8,7 @@ import { createScenarioStory } from '@/remotes/api/claude';
 // type
 import { StoryFormatType } from '@/models';
 import Dialog from '@/components/shared/ui/Dialog';
+import MessageAlert from '@/components/shared/MessageAlert';
 
 export default function useScenarioStory({ genre, world }: { genre: string; world: string }) {
   const queryClient = useQueryClient();
@@ -24,7 +25,11 @@ export default function useScenarioStory({ genre, world }: { genre: string; worl
   // 유저 AI count 체크
   useEffect(() => {
     if (query.isError) {
-      open(<Dialog onClose={close}>{query.error.message}</Dialog>);
+      open(
+        <Dialog>
+          <MessageAlert onClick={close}>{query.error.message}</MessageAlert>
+        </Dialog>,
+      );
     }
   }, [close, open, query.error, query.isError]);
 

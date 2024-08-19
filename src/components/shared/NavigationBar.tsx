@@ -2,14 +2,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import UserAICount from './UserAICount';
 import { Text } from './ui/Text';
 import useOverlay from '@/hooks/useOverlay';
+import Dialog from './ui/Dialog';
+import Login from './Login';
 
 export default function NavigationBar() {
   const { data: session, status } = useSession();
-  const { open, close } = useOverlay();
+  const { open } = useOverlay();
   const [isOpen, setIsOpen] = useState(false);
   const navigationRef = useRef<HTMLDivElement>(null);
 
@@ -29,15 +31,13 @@ export default function NavigationBar() {
   }, [isOpen]);
 
   // 토글 핸들러
-  // const handleToggleClick = () => {
-  //   if (status === 'unauthenticated') {
-  //     return signIn();
-  //   }
-  //   setIsOpen(prev => !prev);
-  // };
   const handleToggleClick = () => {
     if (status === 'unauthenticated') {
-      return open(<div>login</div>);
+      return open(
+        <Dialog>
+          <Login />
+        </Dialog>,
+      );
     }
     setIsOpen(prev => !prev);
   };
@@ -52,7 +52,7 @@ export default function NavigationBar() {
       <div className="flex flex-col justify-between px-6 py-4 md:max-w-[80%] mx-auto">
         <div className="flex items-center justify-between w-full">
           <Link href="/" onClick={handleMenuClick} className="flex items-center gap-2">
-            <Image src="/images/로고_화이트.png" alt="Logo" width={100} height={100} />
+            <Image src="/images/로고_화이트.png" alt="Logo" width={120} height={120} />
           </Link>
           <div className="flex items-center gap-5">
             {session?.user.id && <UserAICount userId={session.user.id} />}
