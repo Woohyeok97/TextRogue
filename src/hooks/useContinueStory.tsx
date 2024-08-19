@@ -7,6 +7,7 @@ import { updateStory } from '@/remotes/mongodb/client/story';
 import { createNextStory } from '@/remotes/api/claude';
 // type
 import { StoryType } from '@/models';
+import MessageAlert from '@/components/shared/MessageAlert';
 
 export default function useContinueStory({ story }: { story: StoryType }) {
   const queryClient = useQueryClient();
@@ -37,7 +38,11 @@ export default function useContinueStory({ story }: { story: StoryType }) {
       queryClient.invalidateQueries({ queryKey: ['userAICount'] });
     },
     onError: err => {
-      open(<Dialog onClose={close}>{err.message}</Dialog>);
+      open(
+        <Dialog>
+          <MessageAlert onClick={close}>{err.message}</MessageAlert>
+        </Dialog>,
+      );
       // alert(err.message);
     },
   });
