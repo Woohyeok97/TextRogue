@@ -14,6 +14,7 @@ export const StoryFormatSchema = z.object({
   choices: z
     .array(z.string().min(1, { message: '선택지를 입력해주세요.' }))
     .length(3, { message: '3가지 선택지를 입력해야 합니다.' }),
+  select: z.string().optional(),
 });
 
 // 스토리 스키마

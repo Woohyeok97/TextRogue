@@ -2,7 +2,7 @@
 import { connectDB } from '../mongodb';
 import { ObjectId } from 'mongodb';
 // type & schema
-import { StoryType } from '@/models';
+import { StoryFormatType, StoryType } from '@/models';
 import { StorySchema } from '@/remotes/schema';
 
 // 스토리 리스트 가져오기
@@ -19,10 +19,32 @@ export const getUserStoryList = async (userId: string): Promise<StoryType[]> => 
 
 // 스토리 단일 가져오기
 export const getStoryById = async (storyId: string): Promise<StoryType> => {
-  console.log('유저 스토리(server) fetching!', storyId);
   const db = (await connectDB).db('prototype');
   const response = await db.collection('story').findOne({ _id: new ObjectId(storyId) });
-  console.log('유저 스토리(server) fetching 완료!!', storyId);
-  // console.log('스토리 (서버) fetch 요청 실행됨!!', storyId);
+  console.log('유저 스토리(server) fetching!', storyId);
   return StorySchema.parse({ ...response, _id: response?._id.toString() });
 };
+
+// 스토리 로그 추가
+export const updateStoryLog = async ({ storyId, select, nextStory }: UpdateStoryLog) => {
+  const db = (await connectDB).db('prototype');
+  const storyCollection = db.collection<{ log: StoryFormatType[] }>('story');
+
+  // 스토리 로그 마지막 요소에 선택지 추가
+  await storyCollection.updateOne(
+    { _id: new ObjectId(storyId) },
+    { $set: { 'log.$[last].select': select } },
+    { arrayFilters: [{ 'last.select': { $exists: false } }] },
+  );
+
+  // 스토리 로그에 새로운 요소 추가
+  await storyCollection.updateOne({ _id: new ObjectId(storyId) }, { $push: { log: nextStory } });
+
+  console.log('Server Action: 스토리 로그 업데이트!', storyId);
+};
+
+interface UpdateStoryLog {
+  storyId: string;
+  select: string;
+  nextStory: StoryFormatType;
+}

@@ -1,5 +1,5 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 // components
 import StoryFormat from './StoryFormat';
 import { Skeleton } from '../shared/ui/Skeleton';
@@ -14,22 +14,19 @@ interface StoryAdvancerProps {
   storyId: string;
 }
 export default function StoryAdvancer({ storyId }: StoryAdvancerProps) {
-  const { data: story } = useQuery<StoryType>({
+  const { data: story } = useSuspenseQuery<StoryType>({
     queryKey: ['story', storyId],
     queryFn: () => getStoryById(storyId),
     staleTime: Infinity,
   });
-
-  const continueStory = useContinueStory({ story } as { story: StoryType });
-  // 스토리 진행 핸들러
-  const handleClick = (choice: string) => {
-    continueStory.mutate(choice);
-  };
+  const { mutate, isPending } = useContinueStory({ story });
 
   return (
     <div className="flex flex-col justify-between gap-10">
-      {story?.log.map((item, i) => <StoryFormat key={i} story={item} onClick={handleClick} />)}
-      {continueStory.isPending && <Skeleton />}
+      {story.log.map((item, i) => (
+        <StoryFormat key={i} story={item} onClick={mutate} />
+      ))}
+      {isPending && <Skeleton />}
     </div>
   );
 }
