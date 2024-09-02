@@ -46,8 +46,6 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
     originPush(`/scenario/${createdId}`);
   });
 
-  console.log('render!');
-
   return (
     <div className="flex flex-col h-full">
       <div className="mb-8">
@@ -55,7 +53,6 @@ export default function CreateScenario({ userId }: CreateScenarioProps) {
           Create Scenario
         </Text>
       </div>
-      <button onClick={() => originPush('/')}>push</button>
       <FormProvider {...methods}>
         <StepProvider name="theme">
           <ScenarioTheme onNext={() => handleNext(['genre', 'world'], 'prologue')} />
