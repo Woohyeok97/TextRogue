@@ -13,7 +13,6 @@ export default function OverlayProvider({ children }: OverlayProviderProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const { close } = useOverlay();
   // console.log('provder!');
-
   // 오버레이 바깥영역 클릭 -> 오버레이 닫기
   const handleOutClick = useCallback(
     (e: MouseEvent) => {

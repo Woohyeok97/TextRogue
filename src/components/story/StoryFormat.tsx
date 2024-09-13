@@ -11,7 +11,6 @@ interface StoryFormatProps {
 }
 // 핸들러 실행시, 다른 형제 StoryFormat 컴포넌트의 리렌더링을 막기위해 memo 메모이징
 const StoryFormat = memo(function StoryFormat({ story, onClick }: StoryFormatProps) {
-  console.log(story.select);
   // 선택하지 않은 상태에서만 핸들러 실행
   const handleClick = (item: string) => {
     if (story.select) {
@@ -29,7 +28,7 @@ const StoryFormat = memo(function StoryFormat({ story, onClick }: StoryFormatPro
           sizes="100%"
           src="/images/올라프.webp"
           className="object-cover w-full h-full"
-          alt="avatar"
+          alt="master"
         />
       </div>
 

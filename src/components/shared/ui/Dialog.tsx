@@ -2,10 +2,14 @@ import Image from 'next/image';
 
 interface DialogProps {
   children: React.ReactNode;
+  onClose?: () => void;
 }
-export default function Dialog({ children }: DialogProps) {
+export default function Dialog({ children, onClose }: DialogProps) {
   return (
-    <div className="flex flex-col items-center mx-8 px-6 pb-6 min-w-[300px] min-h-[200px] bg-gray-600 rounded-lg">
+    <div
+      className="flex flex-col items-center mx-8 px-6 pb-6 min-w-[300px] min-h-[200px] bg-gray-600 rounded-lg"
+      onClick={onClose}
+    >
       <div className="py-4">
         <Image src="/images/로고_화이트.png" alt="Logo" width={150} height={150} />
       </div>
