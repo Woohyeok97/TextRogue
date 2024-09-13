@@ -28,7 +28,7 @@ const StoryFormat = memo(function StoryFormat({ story, onClick }: StoryFormatPro
           sizes="100%"
           src="/images/올라프.webp"
           className="object-cover w-full h-full"
-          alt="avatar"
+          alt="master"
         />
       </div>
 
