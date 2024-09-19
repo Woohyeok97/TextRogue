@@ -1,6 +1,6 @@
 'use client';
 // components
-import { Button } from './ui/Button';
+import { FaRegBookmark, FaBookmark } from 'react-icons/fa';
 // hooks
 import useBookmark from '@/hooks/useBookmark';
 
@@ -17,11 +17,8 @@ export default function Bookmark({ scenarioId, userId }: BookmarkProps) {
   };
 
   return (
-    <Button
-      color={bookmark ? (isPending ? 'gray' : 'blue') : isPending ? 'blue' : 'gray'}
-      onClick={handleClick}
-    >
-      Bookmark
-    </Button>
+    <button onClick={handleClick}>
+      {bookmark ? <FaBookmark size={25} /> : <FaRegBookmark size={25} />}
+    </button>
   );
 }

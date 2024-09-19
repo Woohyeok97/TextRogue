@@ -33,6 +33,7 @@ const colorOptions = {
   blue: 'text-blue-800',
   white: 'text-white',
   gray: 'text-gray-500',
+  lightGray: 'text-gray-400',
   orangered: 'text-orange-700',
 };
 

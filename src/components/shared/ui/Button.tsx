@@ -15,7 +15,8 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`px-6 py-2 rounded-lg ${colorOptions[color]} ${sizeOptions[size]} ${widthOptions[width]}`}
+      // className={`px-6 py-2 rounded-lg ${colorOptions[color]} ${sizeOptions[size]} ${widthOptions[width]}`}
+      className={`rounded ${colorOptions[color]} ${sizeOptions[size]} ${widthOptions[width]}`}
       onClick={onClick}
       {...props}
     >
@@ -25,16 +26,16 @@ export function Button({
 }
 
 const colorOptions = {
-  blue: 'bg-blue-800 duration-200 hover:bg-blue-700',
+  blue: 'bg-blue-800 duration-300 hover:bg-blue-700',
   white: 'bg-white hover:bg-white-hover text-black',
-  gray: 'bg-gray-500 duration-200 text-gray-300 hover:bg-gray-400',
+  gray: 'bg-gray-600 duration-300 text-gray-100 hover:bg-gray-500',
   orangered: 'bg-orange-700',
 };
 
 const sizeOptions = {
   xs: 'text-xs',
-  sm: 'text-sm',
-  base: 'text-base',
+  sm: 'text-sm px-3 py-1',
+  base: 'text-base px-4 py-2',
   md: 'text-md',
   lg: 'text-lg',
   xl: 'text-xl',
