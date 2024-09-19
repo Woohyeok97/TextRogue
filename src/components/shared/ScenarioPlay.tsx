@@ -30,5 +30,9 @@ export default function ScenarioPlay({ scenario, userId }: ScenarioPlayProps) {
       router.push(`/story/${result}`);
     }
   };
-  return <Button onClick={handleClick}>Play</Button>;
+  return (
+    <Button onClick={handleClick} width="full">
+      Play
+    </Button>
+  );
 }

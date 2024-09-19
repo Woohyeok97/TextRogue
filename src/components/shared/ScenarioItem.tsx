@@ -5,13 +5,13 @@ import { authOptions } from '@/lib/authOptions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
 import { Text } from './ui/Text';
+import { Button } from './ui/Button';
+import { Divider } from './ui/Divider';
 import Bookmark from './Bookmark';
 // type
 import { ScenarioType } from '@/models';
 // remotes
 import { getUserBookmark } from '@/remotes/mongodb/server/bookmark';
-import { Button } from './ui/Button';
-import { Divider } from './ui/Divider';
 
 interface ScenarioItemProps {
   scenario: ScenarioType;
@@ -29,7 +29,7 @@ export default async function ScenarioItem({ scenario }: ScenarioItemProps) {
   }
 
   return (
-    <div className="rounded-lg bg-gray-800">
+    <div className="rounded bg-gray-800">
       <div className="flex flex-col gap-8 p-6">
         <div className="flex flex-col gap-3">
           <Link href={`/scenario/${scenario._id}`} className="hover:underline">
