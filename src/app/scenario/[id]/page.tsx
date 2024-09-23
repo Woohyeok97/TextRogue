@@ -13,6 +13,8 @@ import { Divider } from '@/components/shared/ui/Divider';
 // remotes
 import { getScenarioById } from '@/remotes/mongodb/server/scenario';
 import { getUserBookmark } from '@/remotes/mongodb/server/bookmark';
+import { IoMdSettings } from 'react-icons/io';
+import Dropdown from '@/components/shared/ui/Dropdown';
 
 interface ScenarioPageProps {
   params: { id: string };
@@ -74,20 +76,25 @@ export default async function ScenarioPage({ params }: ScenarioPageProps) {
               <Text color="lightGray">{scenario.prologue.text}</Text>
             </div>
 
-            <div className="flex items-center gap-2 pb-6">
-              <Link href="#" className="flex items-center gap-2">
-                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                  <Image
-                    width={100}
-                    height={100}
-                    sizes="100%"
-                    src="/images/방문자.png"
-                    className="object-cover w-full h-full"
-                    alt="avatar"
-                  />
-                </div>
-                <Text weigth="bold">고나우</Text>
-              </Link>
+            <div className="flex justify-between items-center pb-4">
+              <div className="flex items-center gap-2">
+                <Link href="#" className="flex items-center gap-2">
+                  <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                    <Image
+                      width={100}
+                      height={100}
+                      sizes="100%"
+                      src="/images/방문자.png"
+                      className="object-cover w-full h-full"
+                      alt="avatar"
+                    />
+                  </div>
+                  <Text weigth="bold">고나우</Text>
+                </Link>
+              </div>
+              <Dropdown trigger={<IoMdSettings size={20} />} position="top">
+                <div>hi~</div>
+              </Dropdown>
             </div>
           </div>
           <Divider />
