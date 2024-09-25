@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import { useRecoilCallback } from 'recoil';
 import { overlayState } from '@/recoil/atom';
 
-export default function useOverlay() {
+interface Options {
+  exitOnUnmount?: boolean;
+}
+export default function useOverlay({ exitOnUnmount = true }: Options = {}) {
   // 오버레이 열기 : open 전, 기존 오버레이 isOpen을 확인해서 OverlayProvider(overlayState 변경에 따라 리렌더링 되는 컴포넌트) 리렌더링 최소화
   const open = useRecoilCallback(
     ({ set, snapshot }) =>
@@ -30,9 +33,11 @@ export default function useOverlay() {
   // umount 시, 오버레이 닫기
   useEffect(() => {
     return () => {
-      close();
+      if (exitOnUnmount) {
+        close();
+      }
     };
-  }, [close]);
+  }, [close, exitOnUnmount]);
 
   return { open, close };
 }

@@ -11,7 +11,7 @@ interface DeleteScenarioProps {
   scenarioId: string;
 }
 export default function DeleteScenario({ children, scenarioId }: DeleteScenarioProps) {
-  const { open } = useOverlay();
+  const { open, close } = useOverlay(); // 나 DeleteScenario 컴포넌트의 ref가 언마운트되면..?
   const { mutate } = useDeleteScenario();
 
   return (
@@ -23,8 +23,11 @@ export default function DeleteScenario({ children, scenarioId }: DeleteScenarioP
               <Text>시나리오를 삭제하시겠습니까?</Text>
               <div className="flex justify-end gap-2">
                 <div className="border rounded border-gray-500">
-                  <Button color="gray">취소</Button>
+                  <Button color="gray" onClick={close}>
+                    취소
+                  </Button>
                 </div>
+                {/* <Button onClick={() => mutate(scenarioId)}>삭제</Button> */}
                 <Button onClick={() => mutate('123')}>삭제</Button>
               </div>
             </div>
