@@ -1,3 +1,4 @@
+'use server';
 import { connectDB } from '../mongodb';
 import { ObjectId } from 'mongodb';
 // type & schema
@@ -51,4 +52,15 @@ export const getUserBookmarkList = async (userId: string): Promise<ScenarioType[
   // console.timeEnd('유저 북마크 리스트 fetching!');
   console.log('유저 북마크 리스트 fetching! 끝!');
   return result.map(item => ScenarioSchema.parse({ ...item, _id: item._id.toString() }));
+};
+
+// 시나리오 삭제하기
+export const deleteScenario = async (id: string) => {
+  try {
+    const db = (await connectDB).db('prototype');
+    await db.collection('bookmark').deleteMany({ scenarioId: id });
+    await db.collection('scenario').deleteOne({ _id: new ObjectId(id) });
+  } catch (err) {
+    throw new Error(`Could not delete scenario`);
+  }
 };

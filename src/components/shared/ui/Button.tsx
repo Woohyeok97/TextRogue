@@ -35,7 +35,7 @@ const colorOptions = {
 const sizeOptions = {
   xs: 'text-xs',
   sm: 'text-sm px-3 py-1',
-  base: 'text-base px-4 py-2',
+  base: 'text-base px-5 py-2',
   md: 'text-md',
   lg: 'text-lg',
   xl: 'text-xl',

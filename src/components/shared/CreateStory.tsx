@@ -11,7 +11,7 @@ interface ScenarioPlayProps {
   scenario: ScenarioType;
   userId?: string;
 }
-export default function ScenarioPlay({ scenario, userId }: ScenarioPlayProps) {
+export default function CreateStory({ scenario, userId }: ScenarioPlayProps) {
   const router = useRouter();
   const handleClick = async () => {
     if (!userId) {

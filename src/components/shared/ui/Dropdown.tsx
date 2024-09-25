@@ -1,6 +1,5 @@
 'use client';
-
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface DropdownProps {
   children: React.ReactNode;
@@ -10,16 +9,33 @@ interface DropdownProps {
 
 export default function Dropdown({ children, trigger, position = 'bottom' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // 드롭다운 핸들러
   const handleClick = () => {
     setIsOpen(prev => !prev);
   };
 
+  // 드롭다운 바깥영역 클릭 이벤트 처리
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent) => {
+  //     const target = e.target as Node;
+  //     if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+  //       setIsOpen(false);
+  //     }
+  //   };
+
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => document.removeEventListener('mousedown', handleClickOutside);
+  // }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button onClick={handleClick}>{trigger}</button>
       {isOpen && (
-        <div className={`absolute ${positionOptions[position]} bg-gray-600 rounded p-5`}>
+        <div
+          className={`absolute ${positionOptions[position]} min-w-[100px] bg-gray-600 rounded p-2 border border-gray-400`}
+        >
           {children}
         </div>
       )}

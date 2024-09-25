@@ -5,16 +5,18 @@ import { authOptions } from '@/lib/authOptions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 // components
 import PageLayout from '@/components/shared/ui/PageLayout';
-import ScenarioPlay from '@/components/shared/ScenarioPlay';
+import CreateStory from '@/components/shared/CreateStory';
 import Bookmark from '@/components/shared/Bookmark';
+import Dropdown from '@/components/shared/ui/Dropdown';
 import { Button } from '@/components/shared/ui/Button';
 import { Text } from '@/components/shared/ui/Text';
 import { Divider } from '@/components/shared/ui/Divider';
+import { RiDeleteBin5Line, RiPencilLine } from 'react-icons/ri';
 // remotes
 import { getScenarioById } from '@/remotes/mongodb/server/scenario';
 import { getUserBookmark } from '@/remotes/mongodb/server/bookmark';
 import { IoMdSettings } from 'react-icons/io';
-import Dropdown from '@/components/shared/ui/Dropdown';
+import DeleteScenario from '@/components/shared/DeleteScenario';
 
 interface ScenarioPageProps {
   params: { id: string };
@@ -93,13 +95,26 @@ export default async function ScenarioPage({ params }: ScenarioPageProps) {
                 </Link>
               </div>
               <Dropdown trigger={<IoMdSettings size={20} />} position="top">
-                <div>hi~</div>
+                {userId === scenario.userId && (
+                  <div className="flex flex-col font-semibold">
+                    <button className="flex gap-2 items-center p-2 rounded hover:bg-gray-500">
+                      <RiPencilLine size={20} />
+                      <div>수정</div>
+                    </button>
+                    <DeleteScenario scenarioId={scenario._id!}>
+                      <button className="flex gap-2 items-center p-2 rounded text-red-500 hover:bg-gray-500">
+                        <RiDeleteBin5Line size={20} />
+                        <div>삭제</div>
+                      </button>
+                    </DeleteScenario>
+                  </div>
+                )}
               </Dropdown>
             </div>
           </div>
           <Divider />
           <div className="py-6">
-            <ScenarioPlay scenario={scenario} userId={userId} />
+            <CreateStory scenario={scenario} userId={userId} />
           </div>
         </div>
       </div>
