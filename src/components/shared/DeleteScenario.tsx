@@ -1,18 +1,34 @@
 'use client';
+import { useMutation } from '@tanstack/react-query';
+import { deleteScenario } from '@/remotes/mongodb/server/scenario';
+import { useRouter } from 'next/navigation';
 import Dialog from './ui/Dialog';
 import { Text } from './ui/Text';
 import { Button } from './ui/Button';
 // hooks
 import useOverlay from '@/hooks/useOverlay';
-import useDeleteScenario from '@/hooks/useDeleteScenario';
 
 interface DeleteScenarioProps {
   children: React.ReactNode;
   scenarioId: string;
 }
 export default function DeleteScenario({ children, scenarioId }: DeleteScenarioProps) {
-  const { open, close } = useOverlay(); // 나 DeleteScenario 컴포넌트의 ref가 언마운트되면..?
-  const { mutate } = useDeleteScenario();
+  const { open, close } = useOverlay();
+  const router = useRouter();
+
+  // 시나리오 삭제 핸들러
+  const { mutate } = useMutation({
+    mutationFn: async () => {
+      // await deleteScenario(scenarioId);
+      await deleteScenario('123');
+    },
+    onSuccess: () => {
+      router.push('/');
+    },
+    onError: error => {
+      alert(error);
+    },
+  });
 
   return (
     <div
@@ -27,8 +43,7 @@ export default function DeleteScenario({ children, scenarioId }: DeleteScenarioP
                     취소
                   </Button>
                 </div>
-                {/* <Button onClick={() => mutate(scenarioId)}>삭제</Button> */}
-                <Button onClick={() => mutate('123')}>삭제</Button>
+                <Button onClick={mutate}>삭제</Button>
               </div>
             </div>
           </Dialog>,
