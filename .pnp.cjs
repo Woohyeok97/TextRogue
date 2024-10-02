@@ -49,6 +49,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:18.3.1"],\
           ["react-hook-form", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.51.4"],\
+          ["react-icons", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:5.3.0"],\
           ["recoil", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:0.7.7"],\
           ["sharp", "npm:0.33.5"],\
           ["tailwindcss", "npm:3.4.3"],\
@@ -5007,6 +5008,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["react-icons", [\
+      ["npm:5.3.0", {\
+        "packageLocation": "./.yarn/cache/react-icons-npm-5.3.0-3814684035-a53af0de55.zip/node_modules/react-icons/",\
+        "packageDependencies": [\
+          ["react-icons", "npm:5.3.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:5.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/react-icons-virtual-d8500e8b16/0/cache/react-icons-npm-5.3.0-3814684035-a53af0de55.zip/node_modules/react-icons/",\
+        "packageDependencies": [\
+          ["react-icons", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:5.3.0"],\
+          ["@types/react", "npm:18.3.1"],\
+          ["react", "npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["react-is", [\
       ["npm:16.13.1", {\
         "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-33977da7a5.zip/node_modules/react-is/",\
@@ -5733,6 +5756,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:18.3.1"],\
           ["react-hook-form", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:7.51.4"],\
+          ["react-icons", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:5.3.0"],\
           ["recoil", "virtual:d991ab460bfe309f784892602335b334a471f312083aa65e0241971eedbc3b3a8eedcc1dce1d029167e88631165b056224848aa20dd3bb8228b41d1d5ace936a#npm:0.7.7"],\
           ["sharp", "npm:0.33.5"],\
           ["tailwindcss", "npm:3.4.3"],\
