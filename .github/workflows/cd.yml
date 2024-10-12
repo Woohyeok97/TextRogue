@@ -38,13 +38,17 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Remove package
+        run: rm -rf .yarn
+
       - name: Yarn install for production # 설치한 모든 패키지를 제거하고, dependency 패키지만 설치
         run: |
-          rm -rf .yarn
+          corepack enable
+          yarn set version 4.3.1
           yarn workspaces focus --production
 
       - name: make zip file # 필요없는 디렉토리를 제외한 소스번들 압축
-        run: zip -r app.zip . -x "./app.zip" -x ".git/*" -x ".github/*" -x ".vscode/*"
+        run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
 
       - name: Deploy to EB # Elastic Beanstalk으로 배포를 진행한다.
         uses: einaregilsson/beanstalk-deploy@v21
