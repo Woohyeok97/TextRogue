@@ -19,7 +19,7 @@ jobs:
           node-version: 20.x
 
       - name: Install dependencies
-        run: yarn workspaces focus --production
+        run: yarn install
 
       - name: Set Secret ENV
         run: echo "${{ secrets.ENV_VARS }}" > .env
