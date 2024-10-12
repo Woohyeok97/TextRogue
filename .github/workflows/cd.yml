@@ -32,10 +32,10 @@ jobs:
       - name: Yarn install
         run: |
           yarn set version 4.3.1
-          yarn install
+          yarn workspaces focus --production
 
       - name: Build project
-        run: yarn workspaces focus --production
+        run: yarn build
 
       - name: make zip file # node modules 제외한 압축 파일을 만들어준다.
         run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
