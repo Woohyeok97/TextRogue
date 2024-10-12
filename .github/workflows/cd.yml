@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest # action이 구동될 OS 환경을 세팅
@@ -20,7 +20,7 @@ jobs:
 
       - name: Set Secret ENV
         run: echo "${{ secrets.ENV_VARS }}" > .env
-      
+
       - name: Set Public ENV
         run: |
           echo "NEXT_PUBLIC_CLAUDE_PROLOGUE=/api/claude/prologue" >> .env
@@ -28,15 +28,15 @@ jobs:
           echo "NEXT_PUBLIC_SCENARIO=/api/mongodb/scenario" >> .env
           echo "NEXT_PUBLIC_STORY=/api/mongodb/story" >> .env
           echo "NEXT_PUBLIC_BOOKMARK=/api/mongodb/bookmark" >> .env
-    
+
       - name: Yarn install
         run: |
           yarn set version 4.3.1
           yarn install
 
       - name: Build project
-        run: yarn build
-      
+        run: yarn workspaces focus --production
+
       - name: make zip file # node modules 제외한 압축 파일을 만들어준다.
         run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
 
@@ -49,5 +49,5 @@ jobs:
           environment_name: textrogue
           version_label: ${{ github.run_number }}
           region: ap-northeast-2
-          deployment_package: app.zip 
+          deployment_package: app.zip
           use_existing_version_if_available: true
