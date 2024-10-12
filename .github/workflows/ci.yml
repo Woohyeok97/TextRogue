@@ -17,13 +17,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 20.x
-      
+
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Set Secret ENV
         run: echo "${{ secrets.ENV_VARS }}" > .env
-      
+
       - name: Set Public ENV
         run: |
           echo "NEXT_PUBLIC_CLAUDE_PROLOGUE=/api/claude/prologue" >> .env
@@ -34,12 +34,12 @@ jobs:
 
       - name: ESLint
         run: yarn lint
-      
+
       - name: Prettier fix
         run: yarn prettier:write
-      
+
       - name: Prettier
         run: yarn prettier:check
-      
+
       - name: Build project
         run: yarn build
