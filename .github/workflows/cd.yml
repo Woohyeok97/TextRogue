@@ -29,15 +29,21 @@ jobs:
           echo "NEXT_PUBLIC_STORY=/api/mongodb/story" >> .env
           echo "NEXT_PUBLIC_BOOKMARK=/api/mongodb/bookmark" >> .env
 
-      - name: Yarn install
+      - name: Yarn install for build # 빌드를 위해 모든 패키지 설치
         run: |
+          corepack enable
           yarn set version 4.3.1
-          yarn workspaces focus --production
+          yarn install
 
       - name: Build project
         run: yarn build
 
-      - name: make zip file # node modules 제외한 압축 파일을 만들어준다.
+      - name: Yarn install for production # 설치한 모든 패키지를 제거하고, dependency 패키지만 설치
+        run: |
+          rm -rf .yarn
+          yarn workspaces focus --production
+
+      - name: make zip file # 필요없는 디렉토리를 제외한 소스번들 압축
         run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
 
       - name: Deploy to EB # Elastic Beanstalk으로 배포를 진행한다.
