@@ -45,7 +45,7 @@ jobs:
         run: yarn workspaces focus --production
 
       - name: make zip file # 필요없는 디렉토리를 제외한 소스번들 압축
-        run: zip ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*"
+        run: zip -y ./app.zip -r * .[^.]* -x ".git/*" -x ".github/*" -x ".vscode/*" -x ".yarn/unplugged/*"
 
       - name: Deploy to EB # Elastic Beanstalk으로 배포를 진행한다.
         uses: einaregilsson/beanstalk-deploy@v21
